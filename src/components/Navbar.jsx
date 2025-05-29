@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Leaf } from "lucide-react";
+import logo from "../assets/images/agrigain-no-bg.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,13 +22,13 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <img
-                src="/assets/images/agrigain-no-bg.png"
+                src={logo}
                 alt="Agrigain Logo"
                 className="h-8 w-8 object-contain"
               />
-              <span className="text-2xl font-bold text-primary-700">
+              {/* <span className="text-2xl font-bold text-primary-700">
                 Agrigain
-              </span>
+              </span> */}
             </Link>
           </div>
 

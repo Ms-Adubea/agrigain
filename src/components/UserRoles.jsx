@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { TrendingUp, Leaf, Users, ShoppingCart } from 'lucide-react';
 
 const UserRoles = () => {
@@ -19,7 +17,7 @@ const UserRoles = () => {
       description: 'Access premium inputs, expert support, and guaranteed markets for your agricultural produce.',
       benefits: ['Free inputs', 'Expert guidance', 'Guaranteed buyers', 'Premium prices'],
       cta: 'Join as Farmer',
-      color: 'text-primary-600'
+      color: 'text-green-600'
     },
     {
       title: 'Buyers',
@@ -40,7 +38,7 @@ const UserRoles = () => {
   ];
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-green-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -52,30 +50,33 @@ const UserRoles = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {roles.map((role) => (
-            <Card key={role.title} className="hover:shadow-xl transition-shadow duration-300">
-              <CardHeader className="text-center">
-                <role.icon className={`h-12 w-12 mx-auto mb-4 ${role.color}`} />
-                <CardTitle className="text-xl">{role.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 mb-6">{role.description}</p>
-                <ul className="space-y-2 mb-6">
-                  {role.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-center text-sm text-gray-700">
-                      <div className="h-2 w-2 bg-primary-500 rounded-full mr-3"></div>
-                      {benefit}
-                    </li>
-                  ))}
-                </ul>
-                <Button asChild className="w-full">
-                  <Link to="/signup">{role.cta}</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+  {roles.map((role) => (
+    <div
+      key={role.title}
+      className="bg-white rounded-lg border border-gray-200 p-6 shadow-sm hover:shadow-md transition-shadow duration-300 text-center"
+    >
+      <role.icon className={`h-10 w-10 mx-auto mb-4 ${role.color}`} />
+      <h3 className="text-xl font-semibold text-gray-900 mb-3">{role.title}</h3>
+      <p className="text-gray-600 mb-6">{role.description}</p>
+      <ul className="text-sm text-gray-700 mb-6 space-y-2 text-left">
+        {role.benefits.map((benefit, index) => (
+          <li key={index} className="flex items-start gap-2">
+            <span className="mt-1 h-2 w-2 rounded-full bg-green-500 inline-block"></span>
+            {benefit}
+          </li>
+        ))}
+      </ul>
+      <Link
+        to="/signup"
+        className="inline-block w-full text-white text-sm font-semibold py-2 rounded-md bg-green-500 hover:bg-green-600 transition-colors duration-300"
+      >
+        {role.cta}
+      </Link>
+    </div>
+  ))}
+</div>
+
       </div>
     </section>
   );
