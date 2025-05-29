@@ -73,7 +73,7 @@ const Products = () => {
     <>
       <div className="pt-16">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary-50 to-white py-20">
+        <section className="bg-gradient-to-br from-green-50 to-white py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Our Products & Programs
@@ -93,12 +93,12 @@ const Products = () => {
                 <div key={index} className="hover:shadow-xl transition-shadow duration-300">
                   <div>
                     <div className="flex items-center space-x-4 mb-4">
-                      <div className="bg-primary-100 p-3 rounded-lg">
-                        <product.icon className="h-8 w-8 text-primary-600" />
+                      <div className="bg-green-100 p-3 rounded-lg">
+                        <product.icon className="h-8 w-8 text-green-600" />
                       </div>
                       <div>
                         <div className="text-2xl">{product.title}</div>
-                        <p className="text-primary-600 font-medium">{product.subtitle}</p>
+                        <p className="text-green-600 font-medium">{product.subtitle}</p>
                       </div>
                     </div>
                   </div>
@@ -112,15 +112,15 @@ const Products = () => {
                       <ul className="space-y-2">
                         {product.features.map((feature, featureIndex) => (
                           <li key={featureIndex} className="flex items-center text-sm text-gray-700">
-                            <div className="h-2 w-2 bg-primary-500 rounded-full mr-3 flex-shrink-0"></div>
+                            <div className="h-2 w-2 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
                             {feature}
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="bg-primary-50 p-4 rounded-lg mb-6">
-                      <p className="text-sm text-primary-800">
+                    <div className="bg-green-50 p-4 rounded-lg mb-6">
+                      <p className="text-sm text-green-800">
                         <strong>Why Choose This:</strong> {product.benefits}
                       </p>
                     </div>
@@ -150,8 +150,8 @@ const Products = () => {
                     "Through Agrigain, I've increased my farm's productivity by 200% and now have guaranteed buyers for all my produce."
                   </p>
                   <div className="flex items-center">
-                    <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mr-3">
-                      <Leaf className="h-6 w-6 text-primary-600" />
+                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                      <Leaf className="h-6 w-6 text-green-600" />
                     </div>
                     <div>
                       <p className="font-semibold">Akosua Mensah</p>
@@ -168,7 +168,7 @@ const Products = () => {
                   </p>
                   <div className="flex items-center">
                     <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mr-3">
-                      <TrendingUp className="h-6 w-6 text-primary-600" />
+                      <TrendingUp className="h-6 w-6 text-green-600" />
                     </div>
                     <div>
                       <p className="font-semibold">David Osei</p>
@@ -184,8 +184,8 @@ const Products = () => {
                     "Agrigain provides the consistent, quality supply we need for our processing facility. The direct farm connection is invaluable."
                   </p>
                   <div className="flex items-center">
-                    <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mr-3">
-                      <ShoppingCart className="h-6 w-6 text-primary-600" />
+                    <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                      <ShoppingCart className="h-6 w-6 text-green-600" />
                     </div>
                     <div>
                       <p className="font-semibold">Grace Nkrumah</p>

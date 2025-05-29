@@ -46,7 +46,7 @@ const About = () => {
     
       <div className="pt-16">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary-50 to-white py-20">
+        <section className="bg-gradient-to-br from-green-50 to-white py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -60,35 +60,34 @@ const About = () => {
           </div>
         </section>
 
-        {/* Mission & Vision */}
-        <section className="py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12">
-              <div className="p-8">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h2>
-                  <p className="text-gray-600 leading-relaxed">
-                    To improve farmer livelihoods, build sustainable food systems, and provide attractive 
-                    returns to investors by connecting all stakeholders in the agricultural value chain. 
-                    We focus particularly on supporting youth and women farmers while ensuring 10% of 
-                    our profits contribute to community development.
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-8">
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h2>
-                  <p className="text-gray-600 leading-relaxed">
-                    To become West Africa's leading agricultural investment platform, creating a future 
-                    where farming is profitable, sustainable, and accessible to all. We envision thriving 
-                    rural communities with food security, economic prosperity, and environmental stewardship.
-                  </p>
-                </div>
-              </div>
-            </div>
+       <section className="py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-8">
+          
+          {/* Mission Card */}
+          <div className="bg-white p-8 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
+            <p className="text-gray-600 leading-relaxed">
+              To improve farmer livelihoods, build sustainable food systems, and provide attractive 
+              returns to investors by connecting all stakeholders in the agricultural value chain. 
+              We focus particularly on supporting youth and women farmers while ensuring 10% of 
+              our profits contribute to community development.
+            </p>
           </div>
-        </section>
+
+          {/* Vision Card */}
+          <div className="bg-white p-8 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Vision</h2>
+            <p className="text-gray-600 leading-relaxed">
+              To become West Africa's leading agricultural investment platform, creating a future 
+              where farming is profitable, sustainable, and accessible to all. We envision thriving 
+              rural communities with food security, economic prosperity, and environmental stewardship.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
 
         {/* How We Work */}
         <section className="py-20 bg-gray-50">
@@ -98,8 +97,8 @@ const About = () => {
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-primary-600 font-bold text-xl">1</span>
+                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-green-600 font-bold text-xl">1</span>
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">Investors Fund</h3>
                 <p className="text-gray-600 text-sm">
@@ -107,8 +106,8 @@ const About = () => {
                 </p>
               </div>
               <div className="text-center">
-                <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-primary-600 font-bold text-xl">2</span>
+                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-green-600 font-bold text-xl">2</span>
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">Farmers Grow</h3>
                 <p className="text-gray-600 text-sm">
@@ -116,8 +115,8 @@ const About = () => {
                 </p>
               </div>
               <div className="text-center">
-                <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-primary-600 font-bold text-xl">3</span>
+                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-green-600 font-bold text-xl">3</span>
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">Buyers Purchase</h3>
                 <p className="text-gray-600 text-sm">
@@ -125,8 +124,8 @@ const About = () => {
                 </p>
               </div>
               <div className="text-center">
-                <div className="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-primary-600 font-bold text-xl">4</span>
+                <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-green-600 font-bold text-xl">4</span>
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">Everyone Wins</h3>
                 <p className="text-gray-600 text-sm">
@@ -147,7 +146,7 @@ const About = () => {
               {values.map((value, index) => (
                 <div key={index} className="text-center p-6 hover:shadow-lg transition-shadow">
                   <div>
-                    <value.icon className="h-12 w-12 text-primary-600 mx-auto mb-4" />
+                    <value.icon className="h-12 w-12 text-green-600 mx-auto mb-4" />
                     <h3 className="font-semibold text-gray-900 mb-2">{value.title}</h3>
                     <p className="text-gray-600 text-sm">{value.description}</p>
                   </div>
@@ -167,11 +166,11 @@ const About = () => {
               {team.map((member, index) => (
                 <div key={index} className="text-center p-6">
                   <div>
-                    <div className="w-24 h-24 bg-primary-100 rounded-full mx-auto mb-4 flex items-center justify-center">
-                      <Users className="h-12 w-12 text-primary-600" />
+                    <div className="w-24 h-24 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <Users className="h-12 w-12 text-green-600" />
                     </div>
                     <h3 className="font-semibold text-gray-900 mb-1">{member.name}</h3>
-                    <p className="text-primary-600 text-sm mb-3">{member.role}</p>
+                    <p className="text-green-600 text-sm mb-3">{member.role}</p>
                     <p className="text-gray-600 text-sm">{member.description}</p>
                   </div>
                 </div>

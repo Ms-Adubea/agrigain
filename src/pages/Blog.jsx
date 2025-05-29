@@ -64,7 +64,7 @@ const Blog = () => {
     <>
       <div className="pt-16">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-primary-50 to-white py-20">
+        <section className="bg-gradient-to-br from-green-50 to-white py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Agrigain Blog
@@ -80,7 +80,7 @@ const Blog = () => {
         <section className="py-12 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8">
-              <span className="text-primary-600 font-medium">Featured Story</span>
+              <span className="text-green-600 font-medium">Featured Story</span>
             </div>
             <div className="overflow-hidden hover:shadow-xl transition-shadow">
               <div className="md:flex">
@@ -93,7 +93,7 @@ const Blog = () => {
                 </div>
                 <div className="md:w-1/2 p-8">
                   <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">
-                    <span className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full">
+                    <span className="bg-green-100 text-primary-700 px-3 py-1 rounded-full">
                       {blogPosts[0].category}
                     </span>
                     <div className="flex items-center">
@@ -154,7 +154,7 @@ const Blog = () => {
                   </div>
                   <div>
                     <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
-                      <span className="bg-primary-100 text-primary-700 px-2 py-1 rounded text-xs">
+                      <span className="bg-primary-100 text-green-700 px-2 py-1 rounded text-xs">
                         {post.category}
                       </span>
                       <div className="flex items-center">
@@ -191,12 +191,12 @@ const Blog = () => {
         </section>
 
         {/* Newsletter Signup */}
-        <section className="py-20 bg-primary-600 text-white">
+        <section className="py-20 bg-green-600 text-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Stay Updated with Agrigain
             </h2>
-            <p className="text-xl text-primary-100 mb-8">
+            <p className="text-xl text-green-100 mb-8">
               Get the latest insights on agricultural investment, farming innovations, 
               and impact stories delivered to your inbox.
             </p>
