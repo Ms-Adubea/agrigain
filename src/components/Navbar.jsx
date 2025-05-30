@@ -20,17 +20,17 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            {/* <Link to="/" className="flex items-center space-x-2"> */}
-              {/* <img
+            <Link to="/" className="flex items-center space-x-2">
+              <img
                 src={logo}
                 alt="Agrigain Logo"
-                className="h-8 w-8 object-contain"
-              /> */}
+                className="h-15 w-15 object-contain"
+              />
              <Link to="/" className="flex items-center space-x-2">
-              <Leaf className="h-8 w-8 text-green-600" />
+              {/* <Leaf className="h-8 w-8 text-green-600" /> */}
               <span className="text-2xl font-bold text-green-700">Agrigain</span>
             </Link>
-            {/* </Link> */}
+            </Link>
           </div>
 
           {/* Desktop Menu */}
