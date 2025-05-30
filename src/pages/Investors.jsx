@@ -178,27 +178,27 @@ const Investors = () => {
               </div>
 
               {/* Right - Investment Example */}
-              <div className="bg-white shadow-md rounded-lg p-8 border">
+              <div className="bg-white shadow-md rounded-lg p-8 border text-gray-300">
                 <div className="text-2xl font-semibold text-center text-gray-900 mb-6">
                   Investment Example
                 </div>
                 <div className="space-y-6 text-center">
-                  <div className="border-b pb-4">
-                    <p className="text-sm text-gray-500">Initial Investment</p>
+                  <div className="border-b pb-4 text-gray-300">
+                    <p className="text-sm text-gray-800">Initial Investment</p>
                     <p className="text-2xl font-bold text-gray-900">₵10,000</p>
                   </div>
-                  <div className="border-b pb-4">
-                    <p className="text-sm text-gray-500">
+                  <div className="border-b pb-4 text-gray-300">
+                    <p className="text-sm text-gray-800">
                       Expected Return (20%)
                     </p>
                     <p className="text-2xl font-bold text-green-600">₵2,000</p>
                   </div>
-                  <div className="border-b pb-4">
-                    <p className="text-sm text-gray-500">Investment Period</p>
+                  <div className="border-b pb-4 text-gray-300">
+                    <p className="text-sm text-gray-800">Investment Period</p>
                     <p className="text-2xl font-bold text-gray-900">6 Months</p>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-500">Total Return</p>
+                    <p className="text-sm text-gray-800">Total Return</p>
                     <p className="text-3xl font-bold text-green-600">₵12,000</p>
                   </div>
                   <Link
@@ -214,14 +214,14 @@ const Investors = () => {
         </section>
 
         {/* FAQ Section */}
-        <section className="py-20">
+        <section className="py-20 bg-green-100">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
               Frequently Asked Questions
             </h2>
             <div className="space-y-6">
               {faqs.map((faq, index) => (
-                <div key={index} className="p-6">
+                <div key={index} className="bg-white shadow-md rounded-lg p-8 border text-gray-300">
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">
                       {faq.question}
@@ -244,7 +244,7 @@ const Investors = () => {
               Join hundreds of investors who are already earning attractive
               returns while supporting Ghana's agricultural transformation.
             </p>
-            <button asChild size="lg" variant="secondary">
+            <button>
               <Link to="/signup">
                 Create Investor Account <ArrowRight className="ml-2 h-5 w-5" />
               </Link>

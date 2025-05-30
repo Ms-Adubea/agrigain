@@ -9,30 +9,19 @@ import Blog from "./pages/Blog";
 
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <RootLayout />,
-      children: [{ index: true, element: <Home /> }],
-    },
-
-    {
-      path: "/about",
-      element: <About />,
-    },
-    {
-      path: "/products",
-      element: <Products />,
-    },
-    {
-      path: "/investors",
-      element: <Investors />,
-    },
-    {
-      path: "/blog",
-      element: <Blog />,
-    },
-  ]);
+ const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "about", element: <About /> },
+      { path: "products", element: <Products /> },
+      { path: "investors", element: <Investors /> },
+      { path: "blog", element: <Blog /> },
+    ],
+  },
+]);
 
   return (
     <>

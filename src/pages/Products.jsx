@@ -90,7 +90,7 @@ const Products = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12">
               {products.map((product, index) => (
-                <div key={index} className="hover:shadow-xl transition-shadow duration-300">
+                <div key={index} className="hover:shadow-xl transition-shadow duration-300 bg-white shadow-md rounded-lg p-8 border">
                   <div>
                     <div className="flex items-center space-x-4 mb-4">
                       <div className="bg-green-100 p-3 rounded-lg">

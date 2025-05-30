@@ -43,7 +43,6 @@ const About = () => {
   ];
 
   return (
-    
       <div className="pt-16">
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-green-50 to-white py-20">
