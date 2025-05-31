@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Leaf } from 'lucide-react';
+import logo from "../assets/images/agrigain.PNG";
 
 const Footer = () => {
   return (
@@ -7,10 +8,23 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
+            {/* <div className="flex items-center space-x-2 mb-4">
               <Leaf className="h-8 w-8 text-primary-500" />
               <span className="text-2xl font-bold">Agrigain</span>
-            </div>
+            </div> */}
+            <div className="flex items-center">
+                        <Link to="/" className="flex items-center space-x-2">
+                          <img
+                            src={logo}
+                            alt="Agrigain Logo"
+                            className="h-25 w-45 object-contain"
+                          />
+                         <Link to="/" className="flex items-center space-x-2">
+                          {/* <Leaf className="h-8 w-8 text-green-600" /> */}
+                          <span className="text-2xl font-bold text-white">Agrigain</span>
+                        </Link>
+                        </Link>
+                      </div>
             <p className="text-gray-200 mb-4 max-w-md">
               Connecting investors, farmers, vendors, and buyers to build sustainable agricultural value chains in Ghana and beyond.
             </p>

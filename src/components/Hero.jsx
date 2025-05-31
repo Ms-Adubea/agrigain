@@ -130,10 +130,11 @@
 
 
 import { ArrowRight, Users, TrendingUp, Leaf, ShoppingCart } from 'lucide-react';
+import videoSrc from "../assets/videos/hero-bg.mp4";
 
 const Hero = () => {
   return (
-    <section className="relative bg-gradient-to-br from-primary-50 to-white overflow-hidden">
+    <section className="relative bg-gradient-to-br from-green-50 to-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="animate-fade-in">

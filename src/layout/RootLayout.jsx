@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Contact from "../components/Contact";
 
 
 const RootLayout = () => {
@@ -11,6 +12,7 @@ const RootLayout = () => {
       {/* <main className="pt-20 md:pt-24 flex-grow"> */}
         <Outlet />
       </main>
+      <Contact />
       <Footer />
     </div>
   );
