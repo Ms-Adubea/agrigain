@@ -1,4 +1,8 @@
 import { Leaf, Target, Heart, Users } from "lucide-react";
+import man1 from "../assets/images/man1.jpg";
+import man2 from "../assets/images/man2.jpg";
+import woman from "../assets/images/woman.jpg";
+
 
 const About = () => {
   const values = [
@@ -29,35 +33,36 @@ const About = () => {
   ];
 
   const team = [
-    {
-      name: "Martin Kwaku Adjei",
-      role: "Team Lead",
-      description:
-        "Martin is a business advisor who has helped numerous start-ups get off the ground and thrive.",
-      image: "./src/assets/images/man2.jpg",
-    },
-    {
-      name: "Albert Kwashie Amudzi (AKA Farms)",
-      role: "Technical Advisor/Farms Manager",
-      description:
-        "Albert is a crop farmer with over 3 decades of experience and provides technical support across Ghana and beyond.",
-      image: "./src/assets/images/man1.jpg",
-    },
-    {
-      name: "Jacqueline Osei Bonsu",
-      role: "Markets Liaison Officer",
-      description:
-        "Jacqueline is a marketer experienced in sourcing buyers from various markets.",
-      image: "./src/assets/images/woman.jpg",
-    },
-    {
-      name: "Jermaine Sidney Parkins",
-      role: "Markets Liaison Officer",
-      description:
-        "Jermaine is a business communication expert working with start-ups in Ghana.",
-      image: "./src/assets/images/man2.jpg",
-    },
-  ];
+  {
+    name: "Martin Kwaku Adjei",
+    role: "Team Lead",
+    description:
+      "Martin is a business advisor who has helped numerous start-ups get off the ground and thrive.",
+    image: man2,
+  },
+  {
+    name: "Albert Kwashie Amudzi (AKA Farms)",
+    role: "Technical Advisor/Farms Manager",
+    description:
+      "Albert is a crop farmer with over 3 decades of experience and provides technical support across Ghana and beyond.",
+    image: man1,
+  },
+  {
+    name: "Jacqueline Osei Bonsu",
+    role: "Markets Liaison Officer",
+    description:
+      "Jacqueline is a marketer experienced in sourcing buyers from various markets.",
+    image: woman,
+  },
+  {
+    name: "Jermaine Sidney Parkins",
+    role: "Markets Liaison Officer",
+    description:
+      "Jermaine is a business communication expert working with start-ups in Ghana.",
+    image: man2,
+  },
+];
+
 
   return (
     <div className="pt-16">
