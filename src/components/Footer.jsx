@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Leaf } from 'lucide-react';
 import logo from "../assets/images/agrigain.PNG";
 
 const Footer = () => {
