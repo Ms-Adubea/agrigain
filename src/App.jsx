@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Products from "./pages/Products";
 import Investors from "./pages/Investors";
 import Blog from "./pages/Blog";
+import Signup from "./pages/Signup";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       { path: "products", element: <Products /> },
       { path: "investors", element: <Investors /> },
       { path: "blog", element: <Blog /> },
+      { path: "signup", element: <Signup /> },
     ],
   },
 ]);
