@@ -7,6 +7,8 @@ import Products from "./pages/Products";
 import Investors from "./pages/Investors";
 import Blog from "./pages/Blog";
 import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
 
 
 function App() {
@@ -21,6 +23,10 @@ function App() {
       { path: "investors", element: <Investors /> },
       { path: "blog", element: <Blog /> },
       { path: "signup", element: <Signup /> },
+      { path: "login", element: <Login /> },
+      { path: "dashboard/:role", element: <Dashboard /> }
+
+
     ],
   },
 ]);
