@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Leaf, Target, Heart, Users } from "lucide-react";
 import team1 from "../assets/images/charity-team.jpeg";
-import man2 from "../assets/images/man2.jpg";
-import woman from "../assets/images/woman.jpg";
+import ceo from "../assets/images/martin-ceo.jpeg";
 
 
 const About = () => {
@@ -42,10 +41,11 @@ const About = () => {
   const team = [
   {
     name: "Martin Kwaku Adjei",
-    role: "Team Lead",
+    role: "Chief Executive Officer",
     description:
-      "Martin is a business advisor who has helped numerous start-ups get off the ground and thrive.",
-    image: man2,
+      "Martin is a passionate agribusiness leader with over 5 years of experience in finance, administration, and fund management.",
+    image: ceo,
+    details: "With a background in Business Administration from the University of Ghana he has successfully led financial planning and oversight for multiple farm-based projects. His expertise spans financial strategy, budgeting, compliance, and stakeholder engagement—skills he now channels into leading innovative, sustainable, and community-driven farming initiatives. Martin’s commitment to farming goes beyond business: it is rooted in a deep belief in agriculture as a tool for rural empowerment and food security. As CEO, he combines his financial acumen with his passion for farming to drive impactful investment in agriculture through transparent, results-oriented crowd farming models.",
   },
   {
     name: "Charity Emehill Bartels",
@@ -55,20 +55,7 @@ const About = () => {
       details: " Growing up in a small farming community in Ghana’s Central Region, Charity developed a deep-rooted appreciation for agriculture—especially the simple joy of growing carrots—which now fuels her passion for empowering farming communities. In her role as Community Engagement Manager at AgriGain, Charity plays a vital role in connecting the company’s diverse ecosystem—farmers, agri-investors, input suppliers, buyers, and local communities—through meaningful engagement, trust-building, and value-driven communication. She brings a proven track record of leading national and regional outreach campaigns, stakeholder dialogues, and community-centered initiatives. One of her most impactful projects was leading the national “End Stigma Against COVID Victims” campaign, where she partnered with the African Youth Parliament to develop inclusive, community-based engagement frameworks. Her ability to align local voices with broader development goals makes her a powerful bridge between the grassroots and the boardroom. At AgriGain, Charity is committed to ensuring that every engagement delivers mutual value—facilitating investor confidence, supplier partnerships, community goodwill, and most importantly, farmer empowerment. Her vision is clear: to help build resilient agricultural communities while securing lasting returns for all stakeholders.",
     image: team1,
   },
-  {
-    name: "Jacqueline Osei Bonsu",
-    role: "Markets Liaison Officer",
-    description:
-      "Jacqueline is a marketer experienced in sourcing buyers from various markets.",
-    image: woman,
-  },
-  {
-    name: "Jermaine Sidney Parkins",
-    role: "Markets Liaison Officer",
-    description:
-      "Jermaine is a business communication expert working with start-ups in Ghana.",
-    image: man2,
-  },
+
 ];
 
 
