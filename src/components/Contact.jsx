@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Globe } from 'lucide-react';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2'; // Make sure to install sweetalert2
 
@@ -94,6 +94,25 @@ const Contact = () => {
               <span>Accra, Ghana</span>
             </div>
           </div>
+
+           <div className="bg-white rounded-lg shadow-lg p-8">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Follow Us</h3>
+          <div className="flex space-x-4">
+            {[
+              { icon: Globe, name: 'Facebook', color: 'text-blue-600' },
+              { icon: Globe, name: 'Twitter', color: 'text-blue-400' },
+              { icon: Globe, name: 'Instagram', color: 'text-pink-600' },
+              { icon: Globe, name: 'LinkedIn', color: 'text-blue-700' }
+            ].map((social) => (
+              <button
+                key={social.name}
+                className={`p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors ${social.color}`}
+              >
+                <social.icon className="h-5 w-5" />
+              </button>
+            ))}
+          </div>
+        </div>
         </div>
 
         {/* Right side: Form */}

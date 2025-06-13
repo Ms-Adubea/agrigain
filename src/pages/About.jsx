@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Leaf, Target, Heart, Users } from "lucide-react";
-import man1 from "../assets/images/man1.jpg";
+import team1 from "../assets/images/charity-team.jpeg";
 import man2 from "../assets/images/man2.jpg";
 import woman from "../assets/images/woman.jpg";
 
@@ -48,11 +48,12 @@ const About = () => {
     image: man2,
   },
   {
-    name: "Albert Kwashie Amudzi (AKA Farms)",
-    role: "Technical Advisor/Farms Manager",
+    name: "Charity Emehill Bartels",
+    role: "Community Engagement Manager",
     description:
-      "Albert is a crop farmer with over 3 decades of experience and provides technical support across Ghana and beyond.",
-    image: man1,
+      "Charity Emehill Bartels is a seasoned communications and stakeholder engagement expert with nearly two decades of experience spanning media, corporate communications, and grassroots mobilization.",
+      details: " Growing up in a small farming community in Ghana’s Central Region, Charity developed a deep-rooted appreciation for agriculture—especially the simple joy of growing carrots—which now fuels her passion for empowering farming communities. In her role as Community Engagement Manager at AgriGain, Charity plays a vital role in connecting the company’s diverse ecosystem—farmers, agri-investors, input suppliers, buyers, and local communities—through meaningful engagement, trust-building, and value-driven communication. She brings a proven track record of leading national and regional outreach campaigns, stakeholder dialogues, and community-centered initiatives. One of her most impactful projects was leading the national “End Stigma Against COVID Victims” campaign, where she partnered with the African Youth Parliament to develop inclusive, community-based engagement frameworks. Her ability to align local voices with broader development goals makes her a powerful bridge between the grassroots and the boardroom. At AgriGain, Charity is committed to ensuring that every engagement delivers mutual value—facilitating investor confidence, supplier partnerships, community goodwill, and most importantly, farmer empowerment. Her vision is clear: to help build resilient agricultural communities while securing lasting returns for all stakeholders.",
+    image: team1,
   },
   {
     name: "Jacqueline Osei Bonsu",

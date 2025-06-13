@@ -10,7 +10,7 @@ const Signup = () => {
     phone: '',
     password: '',
     confirmPassword: '',
-    userType: '',
+    role: '',
     agreeToTerms: false
   });
 
@@ -44,6 +44,7 @@ const Signup = () => {
               <label className="block text-sm font-medium text-gray-700">First Name</label>
               <input
                 type="text"
+                name="firstName"
                 className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="John"
                 value={formData.firstName}
@@ -55,6 +56,7 @@ const Signup = () => {
               <label className="block text-sm font-medium text-gray-700">Last Name</label>
               <input
                 type="text"
+                name="lastName"
                 className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="Doe"
                 value={formData.lastName}
@@ -68,6 +70,7 @@ const Signup = () => {
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
+              name="email"
               className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="john@example.com"
               value={formData.email}
@@ -80,6 +83,7 @@ const Signup = () => {
             <label className="block text-sm font-medium text-gray-700">Phone Number</label>
             <input
               type="tel"
+              name="phone"
               className="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="+233 XX XXX XXXX"
               value={formData.phone}
