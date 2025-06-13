@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Leaf, Target, Heart, Users } from "lucide-react";
 import team1 from "../assets/images/charity-team.jpeg";
 import ceo from "../assets/images/martin-ceo.jpeg";
+import TeamModal from "../components/TeamModal";
 
 
 const About = () => {
@@ -195,43 +196,39 @@ const About = () => {
 
       {/* Team */}
      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
-            Meet Our Team
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => {
-              const isActive = selectedMember === index;
-
-              return (
-                <div
-                  key={index}
-                  className="relative group rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer"
-                  onClick={() => handleTap(index)}
-                >
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-72 object-cover transform group-hover:scale-105 transition-transform duration-300"
-                  />
-
-                  <div
-                    className={`
-                      absolute inset-0 bg-black bg-opacity-60 
-                      transition-opacity duration-300 flex flex-col justify-center items-center text-center text-white p-4
-                      ${isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"}
-                    `}
-                  >
-                    <h3 className="text-lg font-semibold">{member.name}</h3>
-                    <p className="text-sm italic text-green-200">{member.role}</p>
-                    <p className="text-sm mt-2">{member.description}</p>
-                  </div>
-                </div>
-              );
-            })}
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
+      Meet Our Team
+    </h2>
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {team.map((member, index) => (
+        <div
+          key={index}
+          onClick={() => setSelectedMember(member)}
+          className="cursor-pointer rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-white"
+        >
+          <img
+            src={member.image}
+            alt={member.name}
+            className="w-full h-72 object-cover"
+          />
+          <div className="p-4 text-center">
+            <h3 className="text-lg font-semibold text-gray-900">{member.name}</h3>
+            <p className="text-sm text-green-700">{member.role}</p>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+
+  {/* Modal */}
+  {selectedMember && (
+    <TeamModal
+      member={selectedMember}
+      onClose={() => setSelectedMember(null)}
+    />
+  )}
+</section>
     </div>
   );
 };
