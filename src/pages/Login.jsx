@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Leaf } from "lucide-react";
+import Swal from "sweetalert2";
+import { apiLogin } from "../services/auth";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,30 +13,52 @@ const Login = () => {
     password: "",
   });
 
-  const [error, setError] = useState("");
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic validation
     if (!formData.email || !formData.password) {
-      setError("Please fill in all fields.");
+      Swal.fire({
+        icon: "warning",
+        title: "Missing Fields",
+        text: "Please fill in all fields.",
+        confirmButtonColor: "#16a34a",
+      });
       return;
     }
 
-    // Fake authentication simulation (replace with real logic)
-    if (formData.email === "admin@agrigain.com") {
-      navigate("/dashboard/admin");
-    } else if (formData.email.includes("investor")) {
-      navigate("/dashboard/investor");
-    } else if (formData.email.includes("grower")) {
-      navigate("/dashboard/grower");
-    } else if (formData.email.includes("buyer")) {
-      navigate("/dashboard/buyer");
-    } else if (formData.email.includes("vendor")) {
-      navigate("/dashboard/vendor");
-    } else {
-      setError("Invalid credentials. Try again.");
+    try {
+      const response = await apiLogin(formData);
+      const { role } = response.user || {};
+
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: `Welcome back, ${role || "user"}!`,
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
+      // Navigate based on role
+      if (role === "admin") {
+        navigate("/dashboard/admin");
+      } else if (role === "investor") {
+        navigate("/dashboard/investor");
+      } else if (role === "grower") {
+        navigate("/dashboard/grower");
+      } else if (role === "buyer") {
+        navigate("/dashboard/buyer");
+      } else if (role === "vendor") {
+        navigate("/dashboard/vendor");
+      } else {
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text: error?.response?.data?.message || "Invalid credentials. Try again.",
+        confirmButtonColor: "#ef4444",
+      });
     }
   };
 
@@ -51,12 +76,6 @@ const Login = () => {
         <p className="text-sm text-center text-gray-500">
           Login to your Agrigain account
         </p>
-
-        {error && (
-          <div className="bg-red-100 text-red-700 p-2 rounded text-sm text-center">
-            {error}
-          </div>
-        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

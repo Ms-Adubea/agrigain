@@ -2,11 +2,23 @@ import { apiClient } from "./config"
 
 
 export const apiRegister = async (payload) => {
-    return await apiClient.post ( '/users/register', payload)
-}
+    try {
+        const response = await apiClient.post('/users/register', payload);
+        return response.data;
+    } catch (error) {
+        // Re-throw the error to be handled by the calling component
+        throw error;
+    }
+};
+
 export const apiLogin = async (payload) => {
-    return await apiClient.post ( '/users/signin', payload)
-}
+    try {
+        const response = await apiClient.post('/users/signIn', payload);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
 
 // export const apiSignin = async (payload) => {
 //     return await apiClient.post ( '/vendors/login', payload)
