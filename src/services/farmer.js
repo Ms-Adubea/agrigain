@@ -8,6 +8,10 @@ export const apiFarmerProfile = async (userData) => {
   }
 };
 
+export const apiGetFarmerProfile = async (payload) => {
+    return await apiClient.get ( '/farmers/profile')
+}
+
 export const apiAddProduce = async (userData) => {
   try {
     const response = await apiClient.post('/produce', userData);

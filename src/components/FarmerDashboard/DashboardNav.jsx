@@ -1,9 +1,10 @@
 // components/FarmerDashboard/DashboardNav.jsx
 
 import React, { useState } from 'react';
-import { Home, PlusCircle, List, ShoppingBag, Menu, X } from 'lucide-react';
+import { Home, PlusCircle, List, ShoppingBag, Menu, X, LayoutDashboard } from 'lucide-react';
 
 const navItems = [
+  { key: 'overview', label: 'Overview', icon: <LayoutDashboard size={20} /> },
   { key: 'profile', label: 'Profile', icon: <Home size={20} /> },
   { key: 'add-produce', label: 'Add Produce', icon: <PlusCircle size={20} /> },
   { key: 'my-produce', label: 'My Produce', icon: <List size={20} /> },
@@ -28,7 +29,7 @@ const DashboardNav = ({ onTabChange, activeTab }) => {
       {isOpen && (
         <div
           onClick={toggleMenu}
-          className="fixed inset-0 bg-inherit bg-opacity-50 z-30 md:hidden"
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
         ></div>
       )}
 
