@@ -52,6 +52,7 @@ import Blog from "./pages/Blog";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import FarmerDashboard from "./pages/farmer/dashboard";
 
 function App() {
   const router = createBrowserRouter([
@@ -66,10 +67,12 @@ function App() {
         { path: "blog", element: <Blog /> },
         { path: "signup", element: <Signup /> },
         { path: "login", element: <Login /> },
+        
         { path: "dashboard", element: <Dashboard /> }, // Fallback dashboard route
         { path: "dashboard/:role", element: <Dashboard /> } // Role-specific dashboard
       ],
     },
+     { path: "farmer", element: <FarmerDashboard /> },
   ]);
 
   return (

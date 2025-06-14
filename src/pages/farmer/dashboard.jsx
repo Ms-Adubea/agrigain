@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import DashboardNav from '../../components/FarmerDashboard/DashboardNav';
-import FarmerProfile from '../../components/FarmerDashboard/FarmerProfile';
+import FarmerProfile from '../../components/FarmerDashboard/FarmerProfileForm';
 import AddProduceForm from '../../components/FarmerDashboard/AddProduceForm';
 import ProduceList from '../../components/FarmerDashboard/ProduceList';
 import MarketplaceViewer from '../../components/FarmerDashboard/MarketplaceViewer';
