@@ -37,3 +37,7 @@ export const apiUpdateListing = async (id, formData) => {
         throw error;
     }
 };
+
+// GET  /vendor/orders               // apiGetVendorOrders
+// PATCH /vendor/orders/:id/status  // apiUpdateOrderStatus
+

@@ -9,7 +9,7 @@ const navItems = [
   { key: 'profile', label: 'Profile', icon: <User size={20} /> },
 ];
 
-const VendorNav = ({ activeTab, onTabChange }) => {
+const VendorNav = ({ activeTab, onTabChange, onAddNewItem }) => {
   return (
     <aside className="w-64 bg-white shadow p-4 space-y-6 hidden md:block min-h-screen">
       <h2 className="text-xl font-bold">Vendor Dashboard</h2>
@@ -27,6 +27,15 @@ const VendorNav = ({ activeTab, onTabChange }) => {
           </li>
         ))}
       </ul>
+      {onAddNewItem && (
+  <button
+    onClick={onAddNewItem}
+    className="w-full mt-2 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
+  >
+    + Add New Item
+  </button>
+)}
+
     </aside>
   );
 };

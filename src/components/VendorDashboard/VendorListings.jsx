@@ -97,7 +97,7 @@ import {
 
 const VendorListings = () => {
   const [listings, setListings] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [modalState, setModalState] = useState({ show: false, mode: 'add', listing: null });
 
   const fetchListings = async () => {
     try {
@@ -129,8 +129,16 @@ const VendorListings = () => {
   };
 
   const handleSuccess = () => {
-    setShowModal(false);
+    setModalState({ show: false, mode: 'add', listing: null });
     fetchListings();
+  };
+
+  const openAddModal = () => {
+    setModalState({ show: true, mode: 'add', listing: null });
+  };
+
+  const openEditModal = (listing) => {
+    setModalState({ show: true, mode: 'edit', listing });
   };
 
   useEffect(() => {
@@ -142,7 +150,7 @@ const VendorListings = () => {
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">My Listings</h2>
         <button
-          onClick={() => setShowModal(true)}
+          onClick={openAddModal}
           className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
         >
           Add New Listing
@@ -168,7 +176,12 @@ const VendorListings = () => {
               <p className="text-green-600 font-bold">₦{item.price}</p>
 
               <div className="flex gap-2">
-                <button className="text-blue-600 hover:underline">Edit</button>
+                <button
+                  onClick={() => openEditModal(item)}
+                  className="text-blue-600 hover:underline"
+                >
+                  Edit
+                </button>
                 <button
                   onClick={() => handleDelete(item._id)}
                   className="text-red-600 hover:underline"
@@ -182,16 +195,20 @@ const VendorListings = () => {
       )}
 
       {/* Modal */}
-      {showModal && (
-        <div className="fixed inset-0 bg-opacity-50 flex items-center justify-center z-50">
+      {modalState.show && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded shadow-xl relative w-full max-w-xl">
             <button
-              onClick={() => setShowModal(false)}
+              onClick={() => setModalState({ show: false, mode: 'add', listing: null })}
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-xl font-bold"
             >
               ×
             </button>
-            <AddNewListingForm onSuccess={handleSuccess} />
+            <AddNewListingForm
+              onSuccess={handleSuccess}
+              onClose={() => setModalState({ show: false, mode: 'add', listing: null })}
+              editData={modalState.listing}
+            />
           </div>
         </div>
       )}
