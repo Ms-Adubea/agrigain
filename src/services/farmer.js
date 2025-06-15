@@ -41,4 +41,4 @@ export const apiUpdateProduce = async (id, formData) => {
         console.error('Update error:', error);
         throw error;
     }
-}
+};
