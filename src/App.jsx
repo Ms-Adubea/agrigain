@@ -55,6 +55,7 @@ import Login from "./pages/Login";
 import FarmerDashboard from "./pages/farmer/dashboard";
 import VendorDashboard from "./pages/vendor/dashboard";
 import BuyerDashboard from "./pages/buyer/dashboard";
+import InvestorDashboard from "./pages/investor/dashboard";
 
 function App() {
   const router = createBrowserRouter([
@@ -70,13 +71,14 @@ function App() {
         { path: "signup", element: <Signup /> },
         { path: "login", element: <Login /> },
         
-        { path: "dashboard", element: <Dashboard /> }, // Fallback dashboard route
-        { path: "dashboard/:role", element: <Dashboard /> } // Role-specific dashboard
+        // { path: "dashboard", element: <Dashboard /> }, // Fallback dashboard route
+        // { path: "dashboard/:role", element: <Dashboard /> } // Role-specific dashboard
       ],
     },
      { path: "farmer", element: <FarmerDashboard /> },
      { path: "vendor", element: <VendorDashboard /> },
      { path: "buyer", element: <BuyerDashboard /> },
+     { path: "investor", element: <InvestorDashboard /> },
   ]);
 
   return (
