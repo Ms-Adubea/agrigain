@@ -54,6 +54,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import FarmerDashboard from "./pages/farmer/dashboard";
 import VendorDashboard from "./pages/vendor/dashboard";
+import BuyerDashboard from "./pages/buyer/dashboard";
 
 function App() {
   const router = createBrowserRouter([
@@ -75,6 +76,7 @@ function App() {
     },
      { path: "farmer", element: <FarmerDashboard /> },
      { path: "vendor", element: <VendorDashboard /> },
+     { path: "buyer", element: <BuyerDashboard /> },
   ]);
 
   return (
