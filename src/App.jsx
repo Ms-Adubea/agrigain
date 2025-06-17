@@ -56,6 +56,13 @@ import FarmerDashboard from "./pages/farmer/dashboard";
 import VendorDashboard from "./pages/vendor/dashboard";
 import BuyerDashboard from "./pages/buyer/dashboard";
 import InvestorDashboard from "./pages/investor/dashboard";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./components/AdminPanel/AdminDashboard";
+import AdminLayout from "./components/AdminPanel/AdminLayout";
+import UserManagementTable from "./components/AdminPanel/UserManagementTable";
+import AdminRegister from "./pages/admin/AdminRegister";
+import AdminProjects from "./components/AdminPanel/AdminProjects";
+import AdminProjectPage from "./components/AdminPanel/AdminProjectPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -79,6 +86,19 @@ function App() {
      { path: "vendor", element: <VendorDashboard /> },
      { path: "buyer", element: <BuyerDashboard /> },
      { path: "investor", element: <InvestorDashboard /> },
+
+     { path: "admin", 
+      element: <AdminLayout />, 
+      children:[
+      { index: true, element: <AdminDashboard /> },
+      { path: "users", element: <UserManagementTable /> },
+      { path: "projects", element: <AdminProjects /> },
+      { path: "projects/:id", element: <AdminProjectPage /> },
+     ] },
+
+
+     { path: "admin-login", element: <AdminLogin /> },
+     { path: "admin-register", element: <AdminRegister /> },
   ]);
 
   return (
