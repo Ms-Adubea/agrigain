@@ -20,9 +20,9 @@ const FarmerDashboard = () => {
     const checkProfile = async () => {
       try {
         const profile = await apiGetFarmerProfile();
-        if (profile && profile.farmName) {
-          setHasProfile(true);
-        } else {
+        if (profile && profile.data && Object.keys(profile.data).length > 0) {
+  setHasProfile(true);
+} else {
           throw new Error('Incomplete profile');
         }
       } catch {

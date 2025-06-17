@@ -19,46 +19,107 @@ const FarmerProfileForm = ({ onComplete }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("Form is submitting...");
-    setIsSubmitting(true);
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     console.log("Form is submitting...");
+//     setIsSubmitting(true);
 
-    const cropList = formData.cropTypes
-      .split(',')
-      .map(crop => crop.trim().toLowerCase())
-      .filter(crop => crop);
+//     const cropList = formData.cropTypes
+//       .split(',')
+//       .map(crop => crop.trim().toLowerCase())
+//       .filter(crop => crop);
 
-    // Validate crop types
-    const invalidCrops = cropList.filter(crop => !allowedCrops.includes(crop));
-    if (invalidCrops.length > 0) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Invalid Crop Types',
-        text: `These crops are not supported: ${invalidCrops.join(', ')}`,
-      });
-      setIsSubmitting(false);
-      return;
-    }
+//     // Validate crop types
+//     const invalidCrops = cropList.filter(crop => !allowedCrops.includes(crop));
+//     if (invalidCrops.length > 0) {
+//       Swal.fire({
+//         icon: 'warning',
+//         title: 'Invalid Crop Types',
+//         text: `These crops are not supported: ${invalidCrops.join(', ')}`,
+//       });
+//       setIsSubmitting(false);
+//       return;
+//     }
 
-    try {
-      const payload = {
-        ...formData,
-        cropTypes: cropList,
-        experienceYears: parseInt(formData.experienceYears),
-      };
+//     try {
+//       const payload = {
+//         ...formData,
+//         cropTypes: cropList,
+//         experienceYears: parseInt(formData.experienceYears),
+//       };
 
-console.log("Sending payload:", payload);
+// console.log("Sending payload:", payload);
 
-      const res = await apiFarmerProfile(payload);
+//       const res = await apiFarmerProfile(payload);
+//       setProfile(res.data);
+//       Swal.fire('Success', 'Profile created successfully!', 'success');
+//     } catch (err) {
+//       Swal.fire('Error', err.response?.data?.message || 'Failed to create profile', 'error');
+//     } finally {
+//       setIsSubmitting(false);
+//     }
+//   };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  console.log("Form is submitting...");
+  setIsSubmitting(true);
+
+  const cropList = formData.cropTypes
+    .split(',')
+    .map(crop => crop.trim().toLowerCase())
+    .filter(crop => crop);
+
+  // Validate crop types
+  const invalidCrops = cropList.filter(crop => !allowedCrops.includes(crop));
+  if (invalidCrops.length > 0) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Invalid Crop Types',
+      text: `These crops are not supported: ${invalidCrops.join(', ')}`,
+    });
+    setIsSubmitting(false);
+    return;
+  }
+
+  try {
+    const payload = {
+      ...formData,
+      cropTypes: cropList,
+      experienceYears: parseInt(formData.experienceYears),
+    };
+
+    console.log("Sending payload:", payload);
+    
+    // Add debugging for the API call
+    const res = await apiFarmerProfile(payload);
+    console.log("API Response:", res); // Debug the full response
+    
+    // Check if response has expected structure
+    if (res && res.data) {
       setProfile(res.data);
       Swal.fire('Success', 'Profile created successfully!', 'success');
-    } catch (err) {
-      Swal.fire('Error', err.response?.data?.message || 'Failed to create profile', 'error');
-    } finally {
-      setIsSubmitting(false);
+    } else {
+      console.error("Unexpected response structure:", res);
+      throw new Error("Invalid response structure");
     }
-  };
+  } catch (err) {
+    console.error("Full error object:", err);
+    console.error("Error response:", err.response);
+    console.error("Error message:", err.message);
+    
+    // More detailed error handling
+    let errorMessage = 'Failed to create profile';
+    if (err.response?.data?.message) {
+      errorMessage = err.response.data.message;
+    } else if (err.message) {
+      errorMessage = err.message;
+    }
+    
+    Swal.fire('Error', errorMessage, 'error');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   const goToDashboard = () => {
     if (onComplete) onComplete();
