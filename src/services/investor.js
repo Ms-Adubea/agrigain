@@ -1,4 +1,5 @@
 // services/investor.js
+import { apiClient } from "./config";
 
 export const apiInvestorProfile = async (userData) => {
   try {

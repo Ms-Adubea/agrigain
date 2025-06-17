@@ -1,3 +1,5 @@
+import { apiClient } from "./config";
+
 export const apiBuyerProfile = async (userData) => {
   try {
     const response = await apiClient.post('/buyers/profile', userData);

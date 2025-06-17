@@ -1,3 +1,5 @@
+import { apiClient } from "./config";
+
 export const apiVendorProfile = async (userData) => {
   try {
     const response = await apiClient.post('/vendors/profile', userData);
