@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { apiFarmerProfile } from '../../services/farmer';
 
-const allowedCrops = ["maize", "rice", "cassava", "yam", "sorghum", "tomato", "pepper", "onion"];
+const allowedCrops = ["maize", "rice", "cassava", "yam", "sorghum", "tomato", "tomatoes", "pepper", "onion"];
 
 const FarmerProfileForm = ({ onComplete }) => {
   const [formData, setFormData] = useState({
@@ -19,116 +19,80 @@ const FarmerProfileForm = ({ onComplete }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     console.log("Form is submitting...");
-//     setIsSubmitting(true);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Form is submitting...");
+    setIsSubmitting(true);
 
-//     const cropList = formData.cropTypes
-//       .split(',')
-//       .map(crop => crop.trim().toLowerCase())
-//       .filter(crop => crop);
+    const cropList = formData.cropTypes
+      .split(',')
+      .map(crop => crop.trim().toLowerCase())
+      .filter(crop => crop);
 
-//     // Validate crop types
-//     const invalidCrops = cropList.filter(crop => !allowedCrops.includes(crop));
-//     if (invalidCrops.length > 0) {
-//       Swal.fire({
-//         icon: 'warning',
-//         title: 'Invalid Crop Types',
-//         text: `These crops are not supported: ${invalidCrops.join(', ')}`,
-//       });
-//       setIsSubmitting(false);
-//       return;
-//     }
-
-//     try {
-//       const payload = {
-//         ...formData,
-//         cropTypes: cropList,
-//         experienceYears: parseInt(formData.experienceYears),
-//       };
-
-// console.log("Sending payload:", payload);
-
-//       const res = await apiFarmerProfile(payload);
-//       setProfile(res.data);
-//       Swal.fire('Success', 'Profile created successfully!', 'success');
-//     } catch (err) {
-//       Swal.fire('Error', err.response?.data?.message || 'Failed to create profile', 'error');
-//     } finally {
-//       setIsSubmitting(false);
-//     }
-//   };
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  console.log("Form is submitting...");
-  setIsSubmitting(true);
-
-  const cropList = formData.cropTypes
-    .split(',')
-    .map(crop => crop.trim().toLowerCase())
-    .filter(crop => crop);
-
-  // Validate crop types
-  const invalidCrops = cropList.filter(crop => !allowedCrops.includes(crop));
-  if (invalidCrops.length > 0) {
-    Swal.fire({
-      icon: 'warning',
-      title: 'Invalid Crop Types',
-      text: `These crops are not supported: ${invalidCrops.join(', ')}`,
-    });
-    setIsSubmitting(false);
-    return;
-  }
-
-  try {
-    const payload = {
-      ...formData,
-      cropTypes: cropList,
-      experienceYears: parseInt(formData.experienceYears),
-    };
-
-    console.log("Sending payload:", payload);
-    
-    // Add debugging for the API call
-    const res = await apiFarmerProfile(payload);
-    console.log("API Response:", res); // Debug the full response
-    
-    // Check if response has expected structure
-    if (res && res.data) {
-      setProfile(res.data);
-      Swal.fire('Success', 'Profile created successfully!', 'success');
-    } else {
-      console.error("Unexpected response structure:", res);
-      throw new Error("Invalid response structure");
+    // Validate crop types
+    const invalidCrops = cropList.filter(crop => !allowedCrops.includes(crop));
+    if (invalidCrops.length > 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Crop Types',
+        text: `These crops are not supported: ${invalidCrops.join(', ')}`,
+      });
+      setIsSubmitting(false);
+      return;
     }
-  } catch (err) {
-    console.error("Full error object:", err);
-    console.error("Error response:", err.response);
-    console.error("Error message:", err.message);
-    
-    // More detailed error handling
-    let errorMessage = 'Failed to create profile';
-    if (err.response?.data?.message) {
-      errorMessage = err.response.data.message;
-    } else if (err.message) {
-      errorMessage = err.message;
+
+    try {
+      const payload = {
+        ...formData,
+        cropTypes: cropList,
+        experienceYears: parseInt(formData.experienceYears),
+      };
+
+      console.log("Sending payload:", payload);
+      
+      const res = await apiFarmerProfile(payload);
+      console.log("API Response:", res);
+      
+      if (res && res.data) {
+        setProfile(res.data);
+        await Swal.fire('Success', 'Profile created successfully!', 'success');
+        
+        // ✅ FIXED: Call onComplete immediately after successful profile creation
+        if (onComplete) {
+          onComplete();
+        }
+      } else {
+        console.error("Unexpected response structure:", res);
+        throw new Error("Invalid response structure");
+      }
+    } catch (err) {
+      console.error("Full error object:", err);
+      console.error("Error response:", err.response);
+      console.error("Error message:", err.message);
+      
+      let errorMessage = 'Failed to create profile';
+      if (err.response?.data?.message) {
+        errorMessage = err.response.data.message;
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      
+      Swal.fire('Error', errorMessage, 'error');
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    Swal.fire('Error', errorMessage, 'error');
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+  };
 
   const goToDashboard = () => {
     if (onComplete) onComplete();
   };
 
+  // ✅ OPTIONAL: You can remove this entire section if you want the form to disappear immediately
+  // after profile creation. The parent component will handle the navigation.
   if (profile) {
     return (
       <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-4">
-        <h2 className="text-2xl font-bold mb-2">Profile Created</h2>
+        <h2 className="text-2xl font-bold mb-2">Profile Created Successfully!</h2>
         <p><strong>Farm Size:</strong> {profile.farmSize}</p>
         <p><strong>Crop Types:</strong> {profile.cropTypes.join(', ')}</p>
         <p><strong>Region:</strong> {profile.region}</p>
@@ -138,7 +102,7 @@ const handleSubmit = async (e) => {
           onClick={goToDashboard}
           className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
         >
-          Go to Dashboard
+          Continue to Dashboard
         </button>
       </div>
     );
@@ -208,7 +172,7 @@ const handleSubmit = async (e) => {
             isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
           }`}
         >
-          {isSubmitting ? 'Submitting...' : 'Submit'}
+          {isSubmitting ? 'Submitting...' : 'Create Profile'}
         </button>
       </form>
     </div>

@@ -18,8 +18,16 @@ export const apiAddListing = async (userData) => {
   }
 };
 
+// services/vendor.js
 export const apiGetMarketplaceProducts = async () => {
-    return await apiClient.get('/assets')
+  try {
+    const response = await apiClient.get('/assets');
+    // Ensure we always return an array
+    return Array.isArray(response.data) ? response.data : [];
+  } catch (error) {
+    console.error('Error fetching marketplace products:', error);
+    throw error;
+  }
 };
 
 export const apiGetVendorListings = () => apiClient.get('/assets/me');

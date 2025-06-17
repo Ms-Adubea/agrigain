@@ -77,10 +77,16 @@ export const apiFarmerProfile = async (userData) => {
   }
 };
 
-export const apiGetFarmerProfile = async (payload) => {
+// ✅ FIXED: Return the full response object to maintain consistency with dashboard expectations
+export const apiGetFarmerProfile = async () => {
   try {
     const response = await apiClient.get('/farmers/profile');
-    return response.data;
+    console.log("Get farmer profile response:", response);
+    
+    // Return the full response object so dashboard can access response.data
+    return {
+      data: response.data
+    };
   } catch (error) {
     console.error("Get farmer profile failed:", error);
     throw error;
@@ -147,4 +153,13 @@ export const apiUpdateProduce = async (id, formData) => {
     });
     throw error;
   }
+};
+
+// In your services/farmer.js file
+export const apiUpdateFarmerProfile = async (profileData) => {
+  // If you have a separate update endpoint
+  return axios.put('/api/farmer/profile', profileData);
+  
+  // OR if you use the same endpoint for both create and update
+  return axios.post('/api/farmer/profile', profileData);
 };
