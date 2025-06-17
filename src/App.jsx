@@ -10,7 +10,6 @@
 // import Dashboard from "./pages/Dashboard";
 // import Login from "./pages/Login";
 
-
 // function App() {
 //  const router = createBrowserRouter([
 //   {
@@ -26,7 +25,6 @@
 //       { path: "login", element: <Login /> },
 //       { path: "dashboard", element: <Dashboard /> }, // Add this line
 // { path: "dashboard/:role", element: <Dashboard /> }
-
 
 //     ],
 //   },
@@ -77,28 +75,27 @@ function App() {
         { path: "blog", element: <Blog /> },
         { path: "signup", element: <Signup /> },
         { path: "login", element: <Login /> },
-        
-        // { path: "dashboard", element: <Dashboard /> }, // Fallback dashboard route
-        // { path: "dashboard/:role", element: <Dashboard /> } // Role-specific dashboard
       ],
     },
-     { path: "farmer", element: <FarmerDashboard /> },
-     { path: "vendor", element: <VendorDashboard /> },
-     { path: "buyer", element: <BuyerDashboard /> },
-     { path: "investor", element: <InvestorDashboard /> },
 
-     { path: "admin", 
-      element: <AdminLayout />, 
-      children:[
-      { index: true, element: <AdminDashboard /> },
-      { path: "users", element: <UserManagementTable /> },
-      { path: "projects", element: <AdminProjects /> },
-      { path: "projects/:id", element: <AdminProjectPage /> },
-     ] },
+    { path: "dashboard/farmer", element: <FarmerDashboard /> },
+    { path: "dashboard/vendor", element: <VendorDashboard /> },
+    { path: "dashboard/investor", element: <InvestorDashboard /> },
+    { path: "dashboard/buyer", element: <BuyerDashboard /> },
+    {
+      path: "dashboard/admin",
+      element: <AdminLayout />,
+      children: [
+        { index: true, element: <AdminDashboard /> },
+        { path: "users", element: <UserManagementTable /> },
+        { path: "projects", element: <AdminProjects /> },
+        { path: "projects/:id", element: <AdminProjectPage /> },
+      ],
+    },
 
-
-     { path: "admin-login", element: <AdminLogin /> },
-     { path: "admin-register", element: <AdminRegister /> },
+    { path: "admin-login", element: <AdminLogin /> },
+    { path: "admin-register", element: <AdminRegister /> },
+    { path: "dashboard", element: <Dashboard /> },
   ]);
 
   return (

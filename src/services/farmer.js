@@ -1,15 +1,27 @@
 
+// export const apiFarmerProfile = async (userData) => {
+//   try {
+//     const response = await apiClient.post('/farmers/profile', userData);
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
+
 export const apiFarmerProfile = async (userData) => {
   try {
+    console.log("API function triggered");
     const response = await apiClient.post('/farmers/profile', userData);
     return response.data;
   } catch (error) {
+    console.error("API call failed:", error);
     throw error;
   }
 };
 
+
 export const apiGetFarmerProfile = async (payload) => {
-    return await apiClient.get ( '/farmers/profile')
+    return await apiClient.get( '/farmers/profile')
 }
 
 export const apiAddProduce = async (userData) => {

@@ -327,7 +327,7 @@ const Login = () => {
 
       // Navigate based on role after a short delay to allow the success message to show
       setTimeout(() => {
-        if (role && ["admin", "investor", "farmer", "buyer", "vendor"].includes(role)) {
+        if (role && ["admin",   "investor", "farmer", "buyer", "vendor"].includes(role)) {
           navigate(`/dashboard/${role}`);
         } else {
           // If no valid role, navigate to generic dashboard
@@ -345,6 +345,79 @@ const Login = () => {
       });
     }
   };
+
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+
+//   if (!formData.email || !formData.password) {
+//     Swal.fire({
+//       icon: "warning",
+//       title: "Missing Fields",
+//       text: "Please fill in all fields.",
+//       confirmButtonColor: "#16a34a",
+//     });
+//     return;
+//   }
+
+//   try {
+//     const response = await apiLogin(formData);
+//     console.log("API Response:", response); // Debug log
+
+//     // Handle different response structures
+//     const token = response.token || response.accessToken;
+//     const role = response.user?.role || response.role;
+//     const userName = response.user?.firstName || response.firstName || "user";
+
+//     console.log("Role:", role); // ✅ Debug role
+
+//     // Store the authentication token
+//     if (token) {
+//       setAuthToken(token);
+//     }
+
+//     Swal.fire({
+//       icon: "success",
+//       title: "Login Successful",
+//       text: `Welcome back, ${userName}!`,
+//       timer: 1500,
+//       showConfirmButton: false,
+//     });
+
+//     // Role mapping
+//     const roleMap = {
+//       grower: "farmer",
+//       investor: "investor",
+//       vendor: "vendor",
+//       buyer: "buyer",
+//       admin: "admin",
+//     };
+
+//     const mappedRole = roleMap[role];
+
+//     setTimeout(() => {
+//       if (mappedRole) {
+//         navigate(`/dashboard/${mappedRole}`);
+//       } else {
+//         Swal.fire({
+//           icon: "warning",
+//           title: "Unknown Role",
+//           text: "We couldn't identify your role. Please contact support.",
+//         });
+//         navigate("/dashboard");
+//       }
+//     }, 1600); // Slightly longer than the Swal timer
+
+//   } catch (error) {
+//     console.error("Login error:", error);
+//     Swal.fire({
+//       icon: "error",
+//       title: "Login Failed",
+//       text: error?.response?.data?.message || "Invalid credentials. Try again.",
+//       confirmButtonColor: "#ef4444",
+//     });
+//   }
+// };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-white flex items-center justify-center px-4">

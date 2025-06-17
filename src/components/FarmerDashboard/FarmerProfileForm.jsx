@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { apiFarmerProfile } from '../../services/farmer';
 
+const allowedCrops = ["maize", "rice", "cassava", "yam", "sorghum", "tomato", "pepper", "onion"];
+
 const FarmerProfileForm = ({ onComplete }) => {
   const [formData, setFormData] = useState({
     farmSize: '',
@@ -19,14 +21,34 @@ const FarmerProfileForm = ({ onComplete }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form is submitting...");
     setIsSubmitting(true);
+
+    const cropList = formData.cropTypes
+      .split(',')
+      .map(crop => crop.trim().toLowerCase())
+      .filter(crop => crop);
+
+    // Validate crop types
+    const invalidCrops = cropList.filter(crop => !allowedCrops.includes(crop));
+    if (invalidCrops.length > 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Crop Types',
+        text: `These crops are not supported: ${invalidCrops.join(', ')}`,
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const payload = {
         ...formData,
-        cropTypes: formData.cropTypes.split(',').map(type => type.trim()),
+        cropTypes: cropList,
         experienceYears: parseInt(formData.experienceYears),
       };
+
+console.log("Sending payload:", payload);
 
       const res = await apiFarmerProfile(payload);
       setProfile(res.data);
@@ -39,7 +61,7 @@ const FarmerProfileForm = ({ onComplete }) => {
   };
 
   const goToDashboard = () => {
-    if (onComplete) onComplete(); // let the dashboard handle tab switching
+    if (onComplete) onComplete();
   };
 
   if (profile) {
@@ -72,6 +94,7 @@ const FarmerProfileForm = ({ onComplete }) => {
             name="farmSize"
             value={formData.farmSize}
             onChange={handleChange}
+            placeholder="e.g. 5 acres"
             className="w-full p-2 border rounded"
             required
           />
@@ -84,10 +107,11 @@ const FarmerProfileForm = ({ onComplete }) => {
             name="cropTypes"
             value={formData.cropTypes}
             onChange={handleChange}
+            placeholder="e.g. maize, rice, tomato"
             className="w-full p-2 border rounded"
-            placeholder="e.g. maize, rice"
             required
           />
+          <p className="text-sm text-gray-500 mt-1">Allowed: {allowedCrops.join(', ')}</p>
         </div>
 
         <div>
@@ -97,6 +121,7 @@ const FarmerProfileForm = ({ onComplete }) => {
             name="region"
             value={formData.region}
             onChange={handleChange}
+            placeholder="e.g. Northern Region"
             className="w-full p-2 border rounded"
             required
           />
@@ -109,6 +134,7 @@ const FarmerProfileForm = ({ onComplete }) => {
             name="experienceYears"
             value={formData.experienceYears}
             onChange={handleChange}
+            placeholder="e.g. 3"
             className="w-full p-2 border rounded"
             required
           />

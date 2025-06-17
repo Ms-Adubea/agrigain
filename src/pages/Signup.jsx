@@ -22,7 +22,7 @@ const Signup = () => {
 
   const userTypeDescriptions = {
     investor: 'Fund agricultural projects and earn up to 25% ROI.',
-    grower: 'Access inputs, training, and guaranteed markets.',
+    farmer: 'Access inputs, training, and guaranteed markets.',
     buyer: 'Source certified commodities grown to specification.',
     vendor: 'Supply tools and services to growing farms.'
   };
