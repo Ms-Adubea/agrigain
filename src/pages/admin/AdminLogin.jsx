@@ -21,7 +21,7 @@ const AdminLogin = () => {
       const res = await apiAdminLogin(formData);
       localStorage.setItem('token', res.accessToken);
       Swal.fire('Welcome Admin', 'Login successful!', 'success');
-      navigate('/admin');
+      navigate('/dashboard/admin');
     } catch (error) {
       Swal.fire('Login Failed', error.response?.data?.message || 'Invalid credentials', 'error');
     } finally {

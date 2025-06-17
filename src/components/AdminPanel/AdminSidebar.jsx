@@ -13,10 +13,10 @@ import {
 import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
-  { label: 'Dashboard', icon: <Home size={18} />, path: '/admin' },
-  { label: 'All Users', icon: <Users size={18} />, path: '/admin/users' },
-  { label: 'Listings', icon: <ListOrdered size={18} />, path: '/admin/listings' },
-  { label: 'Projects', icon: <BarChart3 size={18} />, path: '/admin/projects' },
+  { label: 'Dashboard', icon: <Home size={18} />, path: '/dashboard/admin' },
+  { label: 'All Users', icon: <Users size={18} />, path: '/dashboard/admin/users' },
+  { label: 'Listings', icon: <ListOrdered size={18} />, path: '/dashboard/admin/listings' },
+  { label: 'Projects', icon: <BarChart3 size={18} />, path: '/dashboard/admin/projects' },
 ];
 
 const AdminSidebar = () => {

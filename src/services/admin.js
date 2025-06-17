@@ -1,4 +1,5 @@
 // services/admin.js
+import { apiClient } from "./config";
 
 export const apiAdminRegister = async (userData) => {
   const res = await apiClient.post('/users/register', userData);
@@ -10,20 +11,37 @@ export const apiAdminLogin = async (credentials) => {
   return response.data; // contains { accessToken }
 };
 
-// Get all users
+// services/admin.js
 export const apiGetAllUsers = async () => {
-  const res = await apiClient.get('/admin/users');
-  return res.data;
+  try {
+    // Note: The documentation shows email/password in body but this is unusual for GET requests
+    // Typically authentication would be via headers (Bearer token)
+    const response = await apiClient.get('/admin/users');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching users:', error.response?.data || error.message);
+    throw error;
+  }
 };
 
-// Approve user
 export const apiApproveUserStatus = async (userId, status) => {
-  return await apiClient.patch(`/admin/users/${userId}/status`, { status });
+  try {
+    const response = await apiClient.patch(`/admin/users/${userId}/status`, { status });
+    return response.data;
+  } catch (error) {
+    console.error(`Error updating status for user ${userId}:`, error.response?.data || error.message);
+    throw error;
+  }
 };
 
-// Change role
 export const apiChangeUserRole = async (userId, role) => {
-  return await apiClient.patch(`/admin/users/role/${userId}`, { role });
+  try {
+    const response = await apiClient.patch(`/admin/users/role/${userId}`, { role });
+    return response.data;
+  } catch (error) {
+    console.error(`Error changing role for user ${userId}:`, error.response?.data || error.message);
+    throw error;
+  }
 };
 
 // services/admin.js
