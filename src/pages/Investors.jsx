@@ -236,21 +236,24 @@ const Investors = () => {
 
         {/* CTA Section */}
         <section className="py-20 bg-green-600 text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Ready to Start Investing?
-            </h2>
-            <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
-              Join hundreds of investors who are already earning attractive
-              returns while supporting Ghana's agricultural transformation.
-            </p>
-            <button>
-              <Link to="/signup">
-                Create Investor Account <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </button>
-          </div>
-        </section>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          Ready to Start Investing?
+        </h2>
+        <p className="text-lg md:text-xl text-green-100 mb-8 max-w-2xl mx-auto">
+          Join hundreds of investors who are already earning attractive returns while
+          supporting Ghana's agricultural transformation.
+        </p>
+
+        <Link
+          to="/signup"
+          className="inline-flex items-center justify-center bg-white text-green-700 font-medium px-6 py-3 rounded-md shadow hover:bg-gray-100 transition"
+        >
+          Create Investor Account
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </Link>
+      </div>
+    </section>
       </div>
     </>
   );

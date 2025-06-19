@@ -61,6 +61,7 @@ import UserManagementTable from "./components/AdminPanel/UserManagementTable";
 import AdminRegister from "./pages/admin/AdminRegister";
 import AdminProjects from "./components/AdminPanel/AdminProjects";
 import AdminProjectPage from "./components/AdminPanel/AdminProjectPage";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -75,6 +76,7 @@ function App() {
         { path: "blog", element: <Blog /> },
         { path: "signup", element: <Signup /> },
         { path: "login", element: <Login /> },
+        // { path: "contact", element: <ContactPage /> },
       ],
     },
 

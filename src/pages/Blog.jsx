@@ -82,7 +82,7 @@ const Blog = () => {
             <div className="mb-8">
               <span className="text-green-600 font-medium">Featured Story</span>
             </div>
-            <div className="overflow-hidden hover:shadow-xl transition-shadow">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
               <div className="md:flex">
                 <div className="md:w-1/2">
                   <img 
@@ -93,7 +93,7 @@ const Blog = () => {
                 </div>
                 <div className="md:w-1/2 p-8">
                   <div className="flex items-center space-x-4 text-sm text-gray-600 mb-4">
-                    <span className="bg-green-100 text-primary-700 px-3 py-1 rounded-full">
+                    <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full">
                       {blogPosts[0].category}
                     </span>
                     <div className="flex items-center">
@@ -116,7 +116,7 @@ const Blog = () => {
                       <User className="h-5 w-5 text-gray-400 mr-2" />
                       <span className="text-gray-700">{blogPosts[0].author}</span>
                     </div>
-                    <button>
+                    <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors flex items-center">
                       Read More <ArrowRight className="ml-2 h-4 w-4" />
                     </button>
                   </div>
@@ -130,8 +130,15 @@ const Blog = () => {
         <section className="py-8 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-wrap gap-2 justify-center">
-              {categories.map((category) => (
-                <button key={category} variant="outline" size="sm">
+              {categories.map((category, index) => (
+                <button 
+                  key={category} 
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    index === 0 
+                      ? 'bg-green-600 text-white' 
+                      : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
                   {category}
                 </button>
               ))}
@@ -142,9 +149,9 @@ const Blog = () => {
         {/* Blog Posts Grid */}
         <section className="py-12 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {blogPosts.slice(1).map((post, index) => (
-                <div key={index} className="overflow-hidden hover:shadow-xl transition-shadow">
+                <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="aspect-video overflow-hidden">
                     <img 
                       src={post.image} 
@@ -152,9 +159,9 @@ const Blog = () => {
                       className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <div>
-                    <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
-                      <span className="bg-primary-100 text-green-700 px-2 py-1 rounded text-xs">
+                  <div className="p-6">
+                    <div className="flex items-center justify-between text-sm text-gray-600 mb-3">
+                      <span className="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">
                         {post.category}
                       </span>
                       <div className="flex items-center">
@@ -162,15 +169,13 @@ const Blog = () => {
                         {post.readTime}
                       </div>
                     </div>
-                    <div className="text-lg leading-tight">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3 leading-tight">
                       {post.title}
-                    </div>
-                  </div>
-                  <div>
+                    </h3>
                     <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                       {post.excerpt}
                     </p>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center text-sm text-gray-500">
                         <User className="h-4 w-4 mr-1" />
                         {post.author}
@@ -180,7 +185,7 @@ const Blog = () => {
                         {new Date(post.date).toLocaleDateString()}
                       </div>
                     </div>
-                    <button variant="outline" className="w-full mt-4">
+                    <button className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition-colors font-medium">
                       Read Article
                     </button>
                   </div>
@@ -204,9 +209,9 @@ const Blog = () => {
               <input 
                 type="email" 
                 placeholder="Your email address"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900"
+                className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-300"
               />
-              <button size="lg" variant="secondary">
+              <button className="bg-white text-green-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
                 Subscribe
               </button>
             </div>

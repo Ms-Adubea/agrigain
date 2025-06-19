@@ -46,10 +46,10 @@ const About = () => {
     description:
       "Martin is a passionate agribusiness leader with over 5 years of experience in finance, administration, and fund management.",
     image: ceo,
-    details: "With a background in Business Administration from the University of Ghana he has successfully led financial planning and oversight for multiple farm-based projects. His expertise spans financial strategy, budgeting, compliance, and stakeholder engagement—skills he now channels into leading innovative, sustainable, and community-driven farming initiatives. Martin’s commitment to farming goes beyond business: it is rooted in a deep belief in agriculture as a tool for rural empowerment and food security. As CEO, he combines his financial acumen with his passion for farming to drive impactful investment in agriculture through transparent, results-oriented crowd farming models.",
+    details: "With a background in Business Administration from the University of Ghana he has successfully led financial planning and oversight for multiple farm-based projects. His expertise spans financial strategy, budgeting, compliance, and stakeholder engagement—skills he now channels into leading innovative, sustainable, and community-driven farming initiatives. Martin's commitment to farming goes beyond business: it is rooted in a deep belief in agriculture as a tool for rural empowerment and food security. As CEO, he combines his financial acumen with his passion for farming to drive impactful investment in agriculture through transparent, results-oriented crowd farming models.",
   },
   {
-    name: "Charity Emehill Bartels",
+     name: "Charity Emehill Bartels",
     role: "Community Engagement Manager",
     description:
       "Charity Emehill Bartels is a seasoned communications and stakeholder engagement expert with nearly two decades of experience spanning media, corporate communications, and grassroots mobilization.",
@@ -170,7 +170,7 @@ const About = () => {
       </section>
 
       {/* Values */}
-      <section className="py-20">
+      <section className="py-20 bg-green-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
             Our Values
@@ -195,40 +195,42 @@ const About = () => {
       </section>
 
       {/* Team */}
-     <section className="py-20 bg-gray-50">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
-      Meet Our Team
-    </h2>
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {team.map((member, index) => (
-        <div
-          key={index}
-          onClick={() => setSelectedMember(member)}
-          className="cursor-pointer rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-white"
-        >
-          <img
-            src={member.image}
-            alt={member.name}
-            className="w-full h-72 object-cover"
-          />
-          <div className="p-4 text-center">
-            <h3 className="text-lg font-semibold text-gray-900">{member.name}</h3>
-            <p className="text-sm text-green-700">{member.role}</p>
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
+            Meet Our Team
+          </h2>
+          <div className="flex justify-center">
+            <div className="grid md:grid-cols-2 gap-16 max-w-2xl">
+              {team.map((member, index) => (
+                <div
+                  key={index}
+                  onClick={() => setSelectedMember(member)}
+                  className="cursor-pointer rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-white"
+                >
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-72 object-cover"
+                  />
+                  <div className="p-4 text-center">
+                    <h3 className="text-lg font-semibold text-gray-900">{member.name}</h3>
+                    <p className="text-sm text-green-700">{member.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      ))}
-    </div>
-  </div>
 
-  {/* Modal */}
-  {selectedMember && (
-    <TeamModal
-      member={selectedMember}
-      onClose={() => setSelectedMember(null)}
-    />
-  )}
-</section>
+        {/* Modal */}
+        {selectedMember && (
+          <TeamModal
+            member={selectedMember}
+            onClose={() => setSelectedMember(null)}
+          />
+        )}
+      </section>
     </div>
   );
 };

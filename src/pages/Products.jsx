@@ -1,72 +1,86 @@
-import { Link } from 'react-router-dom';
-import { TrendingUp, Leaf, Users, ShoppingCart, ArrowRight } from 'lucide-react';
+import { Link } from "react-router-dom";
+import {
+  TrendingUp,
+  Leaf,
+  Users,
+  ShoppingCart,
+  ArrowRight,
+} from "lucide-react";
 
 const Products = () => {
   const products = [
     {
-      title: 'For Buyers',
+      title: "For Buyers",
       icon: ShoppingCart,
-      subtitle: 'Source Premium Commodities',
-      description: 'Access certified, high-quality agricultural commodities grown to your exact specifications by our network of professional farmers.',
+      subtitle: "Source Premium Commodities",
+      description:
+        "Access certified, high-quality agricultural commodities grown to your exact specifications by our network of professional farmers.",
       features: [
-        'Quality Assurance & Certification',
-        'Custom Specification Growing',
-        'Reliable Supply Chain',
-        'Direct Farm-to-Market',
-        'Competitive Pricing',
-        'Seasonal Planning Support'
+        "Quality Assurance & Certification",
+        "Custom Specification Growing",
+        "Reliable Supply Chain",
+        "Direct Farm-to-Market",
+        "Competitive Pricing",
+        "Seasonal Planning Support",
       ],
-      benefits: 'Guaranteed quality, consistent supply, and direct relationships with producers.',
-      cta: 'Start Buying'
+      benefits:
+        "Guaranteed quality, consistent supply, and direct relationships with producers.",
+      cta: "Start Buying",
     },
     {
-      title: 'For Growers',
+      title: "For Growers",
       icon: Leaf,
-      subtitle: 'Access Global Markets',
-      description: 'Join our network of successful farmers and gain access to premium inputs, expert guidance, and guaranteed markets for your produce.',
+      subtitle: "Access Global Markets",
+      description:
+        "Join our network of successful farmers and gain access to premium inputs, expert guidance, and guaranteed markets for your produce.",
       features: [
-        'Free Premium Inputs',
-        'Expert Agricultural Training',
-        'Guaranteed Buyer Network',
-        'Premium Price Guarantees',
-        'Technical Support',
-        'Insurance Coverage'
+        "Free Premium Inputs",
+        "Expert Agricultural Training",
+        "Guaranteed Buyer Network",
+        "Premium Price Guarantees",
+        "Technical Support",
+        "Insurance Coverage",
       ],
-      benefits: 'Increased yields, higher profits, and reduced farming risks with full support.',
-      cta: 'Join as Farmer'
+      benefits:
+        "Increased yields, higher profits, and reduced farming risks with full support.",
+      cta: "Join as Farmer",
     },
     {
-      title: 'For Vendors',
+      title: "For Vendors",
       icon: Users,
-      subtitle: 'Supply Growing Network',
-      description: 'Supply tools, fertilizers, seeds, and services to our rapidly expanding network of productive and profitable farmers.',
+      subtitle: "Supply Growing Network",
+      description:
+        "Supply tools, fertilizers, seeds, and services to our rapidly expanding network of productive and profitable farmers.",
       features: [
-        'Growing Customer Base',
-        'Guaranteed Payment Terms',
-        'Bulk Order Opportunities',
-        'Long-term Contracts',
-        'Market Intelligence',
-        'Partnership Support'
+        "Growing Customer Base",
+        "Guaranteed Payment Terms",
+        "Bulk Order Opportunities",
+        "Long-term Contracts",
+        "Market Intelligence",
+        "Partnership Support",
       ],
-      benefits: 'Stable revenue streams and growing market reach with reliable farmers.',
-      cta: 'Supply Inputs'
+      benefits:
+        "Stable revenue streams and growing market reach with reliable farmers.",
+      cta: "Supply Inputs",
     },
     {
-      title: 'For Investors',
+      title: "For Investors",
       icon: TrendingUp,
-      subtitle: 'Earn While Making Impact',
-      description: 'Fund agricultural projects and earn attractive returns up to 25% in 6 months while supporting sustainable agriculture and community development.',
+      subtitle: "Earn While Making Impact",
+      description:
+        "Fund agricultural projects and earn attractive returns up to 25% in 6 months while supporting sustainable agriculture and community development.",
       features: [
-        'Up to 25% ROI in 6 Months',
-        'Full Insurance Coverage',
-        'Transparent Project Tracking',
-        'Quarterly Payout Options',
-        'Impact Reporting',
-        'Portfolio Diversification'
+        "Up to 25% ROI in 6 Months",
+        "Full Insurance Coverage",
+        "Transparent Project Tracking",
+        "Quarterly Payout Options",
+        "Impact Reporting",
+        "Portfolio Diversification",
       ],
-      benefits: 'Guaranteed returns with measurable social and environmental impact.',
-      cta: 'Start Investing'
-    }
+      benefits:
+        "Guaranteed returns with measurable social and environmental impact.",
+      cta: "Start Investing",
+    },
   ];
 
   return (
@@ -79,8 +93,9 @@ const Products = () => {
               Our Products & Programs
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive solutions for every stakeholder in the agricultural value chain. 
-              Join thousands who are already benefiting from our integrated platform.
+              Comprehensive solutions for every stakeholder in the agricultural
+              value chain. Join thousands who are already benefiting from our
+              integrated platform.
             </p>
           </div>
         </section>
@@ -90,7 +105,10 @@ const Products = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12">
               {products.map((product, index) => (
-                <div key={index} className="hover:shadow-xl transition-shadow duration-300 bg-white shadow-md rounded-lg p-8 border">
+                <div
+                  key={index}
+                  className="hover:shadow-xl transition-shadow duration-300 bg-white shadow-md rounded-lg p-8 border"
+                >
                   <div>
                     <div className="flex items-center space-x-4 mb-4">
                       <div className="bg-green-100 p-3 rounded-lg">
@@ -98,7 +116,9 @@ const Products = () => {
                       </div>
                       <div>
                         <div className="text-2xl">{product.title}</div>
-                        <p className="text-green-600 font-medium">{product.subtitle}</p>
+                        <p className="text-green-600 font-medium">
+                          {product.subtitle}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -108,10 +128,15 @@ const Products = () => {
                     </p>
 
                     <div className="mb-6">
-                      <h4 className="font-semibold text-gray-900 mb-3">Key Features:</h4>
+                      <h4 className="font-semibold text-gray-900 mb-3">
+                        Key Features:
+                      </h4>
                       <ul className="space-y-2">
                         {product.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-center text-sm text-gray-700">
+                          <li
+                            key={featureIndex}
+                            className="flex items-center text-sm text-gray-700"
+                          >
                             <div className="h-2 w-2 bg-green-500 rounded-full mr-3 flex-shrink-0"></div>
                             {feature}
                           </li>
@@ -125,11 +150,13 @@ const Products = () => {
                       </p>
                     </div>
 
-                    <button asChild className="w-full">
-                      <Link to="/signup">
-                        {product.cta} <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </button>
+                    <Link
+                      to="/signup"
+                      className="block w-full text-center bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded transition"
+                    >
+                      {product.cta}{" "}
+                      <ArrowRight className="inline-block ml-2 h-4 w-4" />
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -147,7 +174,8 @@ const Products = () => {
               <div className="p-6">
                 <div>
                   <p className="text-gray-600 mb-4 italic">
-                    "Through Agrigain, I've increased my farm's productivity by 200% and now have guaranteed buyers for all my produce."
+                    "Through Agrigain, I've increased my farm's productivity by
+                    200% and now have guaranteed buyers for all my produce."
                   </p>
                   <div className="flex items-center">
                     <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-3">
@@ -155,7 +183,9 @@ const Products = () => {
                     </div>
                     <div>
                       <p className="font-semibold">Akosua Mensah</p>
-                      <p className="text-sm text-gray-600">Tomato Farmer, Ashanti</p>
+                      <p className="text-sm text-gray-600">
+                        Tomato Farmer, Ashanti
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -164,7 +194,9 @@ const Products = () => {
               <div className="p-6">
                 <div>
                   <p className="text-gray-600 mb-4 italic">
-                    "My investment in Agrigain returned 23% in just 5 months while supporting local farmers. It's impact investing at its best."
+                    "My investment in Agrigain returned 23% in just 5 months
+                    while supporting local farmers. It's impact investing at its
+                    best."
                   </p>
                   <div className="flex items-center">
                     <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mr-3">
@@ -172,7 +204,9 @@ const Products = () => {
                     </div>
                     <div>
                       <p className="font-semibold">David Osei</p>
-                      <p className="text-sm text-gray-600">Angel Investor, Accra</p>
+                      <p className="text-sm text-gray-600">
+                        Angel Investor, Accra
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -181,7 +215,9 @@ const Products = () => {
               <div className="p-6">
                 <div>
                   <p className="text-gray-600 mb-4 italic">
-                    "Agrigain provides the consistent, quality supply we need for our processing facility. The direct farm connection is invaluable."
+                    "Agrigain provides the consistent, quality supply we need
+                    for our processing facility. The direct farm connection is
+                    invaluable."
                   </p>
                   <div className="flex items-center">
                     <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-3">
@@ -189,7 +225,9 @@ const Products = () => {
                     </div>
                     <div>
                       <p className="font-semibold">Grace Nkrumah</p>
-                      <p className="text-sm text-gray-600">Food Processor, Tema</p>
+                      <p className="text-sm text-gray-600">
+                        Food Processor, Tema
+                      </p>
                     </div>
                   </div>
                 </div>

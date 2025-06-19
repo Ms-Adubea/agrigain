@@ -1,4 +1,6 @@
 import { MapPin, Phone, Mail, Globe } from 'lucide-react';
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+
 
 const ContactPage = () => (
   <div className="max-w-4xl mx-auto px-4 py-16">
@@ -106,25 +108,45 @@ const ContactPage = () => (
           </div>
         </div>
 
-        {/* Social Media */}
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Follow Us</h3>
-          <div className="flex space-x-4">
-            {[
-              { icon: Globe, name: 'Facebook', color: 'text-blue-600' },
-              { icon: Globe, name: 'Twitter', color: 'text-blue-400' },
-              { icon: Globe, name: 'Instagram', color: 'text-pink-600' },
-              { icon: Globe, name: 'LinkedIn', color: 'text-blue-700' }
-            ].map((social) => (
-              <button
-                key={social.name}
-                className={`p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors ${social.color}`}
-              >
-                <social.icon className="h-5 w-5" />
-              </button>
-            ))}
-          </div>
-        </div>
+       {/* Social Media */}
+<div className="bg-white rounded-lg shadow-lg p-8">
+  <h3 className="text-lg font-semibold text-gray-900 mb-4">Follow Us</h3>
+  <div className="flex space-x-4">
+    <a
+      href="https://facebook.com/agrigain" // Replace with your actual page
+      target="_blank"
+      rel="noopener noreferrer"
+      className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 text-blue-600 transition-colors"
+    >
+      <FaFacebookF className="h-5 w-5" />
+    </a>
+    <a
+      href="https://twitter.com/agrigain"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 text-blue-400 transition-colors"
+    >
+      <FaTwitter className="h-5 w-5" />
+    </a>
+    <a
+      href="https://instagram.com/agrigain"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 text-pink-600 transition-colors"
+    >
+      <FaInstagram className="h-5 w-5" />
+    </a>
+    <a
+      href="https://linkedin.com/company/agrigain"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="p-3 rounded-full bg-gray-100 hover:bg-gray-200 text-blue-700 transition-colors"
+    >
+      <FaLinkedinIn className="h-5 w-5" />
+    </a>
+  </div>
+</div>
+
       </div>
     </div>
   </div>

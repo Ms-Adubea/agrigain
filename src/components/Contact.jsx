@@ -1,6 +1,7 @@
-import { Mail, Phone, MapPin, Send, Globe } from 'lucide-react';
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 import React, { useState } from 'react';
-import Swal from 'sweetalert2'; // Make sure to install sweetalert2
+import Swal from 'sweetalert2';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,16 +12,11 @@ const Contact = () => {
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
       Swal.fire({
         icon: 'warning',
@@ -34,9 +30,7 @@ const Contact = () => {
     try {
       const response = await fetch('https://formspree.io/f/movwaykk', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
 
@@ -49,18 +43,13 @@ const Contact = () => {
         });
         setFormData({ name: '', email: '', phone: '', message: '' });
       } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Failed to send message. Please try again later.',
-          confirmButtonColor: '#008236'
-        });
+        throw new Error();
       }
-    } catch (error) {
+    } catch {
       Swal.fire({
         icon: 'error',
-        title: 'Network Error',
-        text: 'An error occurred. Please check your internet connection and try again.',
+        title: 'Error',
+        text: 'Failed to send message. Please check your internet connection.',
         confirmButtonColor: '#008236'
       });
     }
@@ -95,28 +84,28 @@ const Contact = () => {
             </div>
           </div>
 
-           <div className="bg-white rounded-lg shadow-lg p-8">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Follow Us</h3>
-          <div className="flex space-x-4">
-            {[
-              { icon: Globe, name: 'Facebook', color: 'text-blue-600' },
-              { icon: Globe, name: 'Twitter', color: 'text-blue-400' },
-              { icon: Globe, name: 'Instagram', color: 'text-pink-600' },
-              { icon: Globe, name: 'LinkedIn', color: 'text-blue-700' }
-            ].map((social) => (
-              <button
-                key={social.name}
-                className={`p-3 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors ${social.color}`}
-              >
-                <social.icon className="h-5 w-5" />
-              </button>
-            ))}
+          <div className="bg-white rounded-lg shadow-lg p-8">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Follow Us</h3>
+            <div className="flex space-x-4">
+              <a href="https://www.facebook.com/share/1NzQkdg5r5/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors text-blue-600">
+                <FaFacebookF size={20} />
+              </a>
+              <a href="https://twitter.com/YOUR_HANDLE" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors text-blue-400">
+                <FaTwitter size={20} />
+              </a>
+              <a href="https://instagram.com/YOUR_PROFILE" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-gray-100 hover:bg-pink-100 transition-colors text-pink-600">
+                <FaInstagram size={20} />
+              </a>
+              <a href="https://linkedin.com/in/YOUR_PROFILE" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-gray-100 hover:bg-blue-100 transition-colors text-blue-700">
+                <FaLinkedinIn size={20} />
+              </a>
+            </div>
           </div>
-        </div>
         </div>
 
         {/* Right side: Form */}
         <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-2xl p-8 space-y-6 border border-green-100">
+          {/* ...form fields unchanged... */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Name *</label>
             <input
