@@ -13,8 +13,15 @@ export const apiBuyerProfile = async (userData) => {
 export const apiGetAllProduce = async () => {
   try {
     const response = await apiClient.get('/produce');
-    // Ensure we always return an array
-    return Array.isArray(response.data) ? response.data : [];
+    
+    // Handle both possible response structures
+    if (Array.isArray(response.data)) {
+      return response.data; // If API returns array directly
+    } else if (response.data?.produce) {
+      return response.data.produce; // If API returns { produce: [...] }
+    }
+    
+    return []; // Default fallback
   } catch (error) {
     console.error('Error fetching all produce:', error);
     throw error;
