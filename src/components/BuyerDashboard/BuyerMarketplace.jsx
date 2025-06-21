@@ -88,39 +88,156 @@ const BuyerMarketplace = ({
     setQuantity(1);
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-          <span className="ml-4">Loading marketplace...</span>
+  // Products Loading Component
+  const ProductsLoading = () => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      {[...Array(8)].map((_, index) => (
+        <div key={index} className="bg-white rounded-xl overflow-hidden shadow-sm animate-pulse">
+          <div className="h-48 bg-gray-300"></div>
+          <div className="p-4">
+            <div className="h-4 bg-gray-300 rounded mb-2"></div>
+            <div className="h-3 bg-gray-300 rounded mb-2 w-3/4"></div>
+            <div className="h-3 bg-gray-300 rounded mb-3 w-1/2"></div>
+            <div className="h-8 bg-gray-300 rounded"></div>
+          </div>
         </div>
-      </div>
-    );
-  }
+      ))}
+    </div>
+  );
 
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gray-50 p-6">
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-          <strong className="font-bold">Error!</strong>
+  // Products Error Component
+  const ProductsError = () => (
+    <div className="bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded-lg" role="alert">
+      <div className="flex justify-between items-center">
+        <div>
+          <strong className="font-bold">Error loading products!</strong>
           <span className="block sm:inline"> {error}</span>
-          <button 
-            onClick={() => window.location.reload()}
-            className="absolute top-0 bottom-0 right-0 px-4 py-3"
-          >
-            <svg className="fill-current h-6 w-6 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"/>
-            </svg>
-          </button>
         </div>
+        <button 
+          onClick={() => {
+            setLoading(true);
+            setError(null);
+            // Retry fetching
+            const fetchProduce = async () => {
+              try {
+                const data = await apiGetAllProduce();
+                setProducts(data);
+                setLoading(false);
+              } catch (err) {
+                console.error('Failed to fetch produce:', err);
+                setError(err.response?.data?.message || 'Failed to load marketplace products.');
+                setLoading(false);
+              }
+            };
+            fetchProduce();
+          }}
+          className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm font-medium transition-colors"
+        >
+          Retry
+        </button>
+      </div>
+    </div>
+  );
+
+  // Products Content Component
+  const ProductsContent = () => {
+    if (loading) return <ProductsLoading />;
+    if (error) return <ProductsError />;
+    
+    if (filteredProducts.length === 0) {
+      return (
+        <div className="text-center py-12">
+          <Package className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <p className="text-gray-500 text-lg mb-4">
+            {products.length === 0 
+              ? 'No produce available in the marketplace yet.' 
+              : 'No produce matches your search.'}
+          </p>
+          {products.length > 0 && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors"
+            >
+              Clear Search
+            </button>
+          )}
+        </div>
+      );
+    }
+
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {filteredProducts.map((product) => (
+          <div
+            key={product._id}
+            className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200"
+          >
+            <div className="relative">
+              <img
+                src={product.images?.[0]?.url || '/placeholder-produce.jpg'}
+                alt={product.name}
+                className="w-full h-48 object-cover"
+                loading="lazy"
+              />
+              <button
+                onClick={() => toggleFavorite(product._id)}
+                className="absolute top-3 right-3 p-2 bg-white rounded-full shadow-sm hover:shadow-md transition-all"
+              >
+                <Heart 
+                  className={`w-4 h-4 ${
+                    favorites.includes(product._id) 
+                      ? 'text-red-500 fill-current' 
+                      : 'text-gray-400'
+                  }`} 
+                />
+              </button>
+              {product.userId?.farmName && (
+                <div className="absolute bottom-3 left-3 flex items-center space-x-1 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                  <MapPin className="w-3 h-3" />
+                  <span>{product.userId.farmName}</span>
+                </div>
+              )}
+            </div>
+            
+            <div className="p-4">
+              <h3 className="font-semibold text-gray-900 mb-1">{product.name}</h3>
+              <div className="flex items-center space-x-1 mb-2">
+                <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                <span className="text-sm font-medium">4.8</span>
+                <span className="text-sm text-gray-500">{product.category || 'Vegetables'}</span>
+              </div>
+              
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-lg font-bold text-green-600">
+                  {currencySymbol}{product.price?.toLocaleString() || '0'}
+                </span>
+                <span className="text-sm text-gray-500">per kg</span>
+              </div>
+
+              <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
+                <span>{product.images?.length || 4} photos available</span>
+                <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-medium">
+                  In Stock
+                </span>
+              </div>
+              
+              <button
+                onClick={() => handleOrderClick(product)}
+                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
+              >
+                <Package className="w-4 h-4" />
+                <span>Order Now</span>
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     );
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Stats Cards */}
+      {/* Stats Cards - Always visible */}
       <div className="px-6 py-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <div className="bg-white rounded-xl p-6 shadow-sm">
@@ -176,7 +293,7 @@ const BuyerMarketplace = ({
           </div>
         </div>
 
-        {/* Search and Filter Bar */}
+        {/* Search and Filter Bar - Always visible */}
         <div className="bg-white rounded-xl p-4 shadow-sm mb-6">
           <div className="flex items-center space-x-4">
             <div className="flex-1 relative">
@@ -196,91 +313,8 @@ const BuyerMarketplace = ({
           </div>
         </div>
 
-        {/* Products Grid */}
-        {filteredProducts.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-gray-500 text-lg mb-4">
-              {products.length === 0 
-                ? 'No produce available in the marketplace yet.' 
-                : 'No produce matches your search.'}
-            </p>
-            {products.length > 0 && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg"
-              >
-                Clear Search
-              </button>
-            )}
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredProducts.map((product) => (
-              <div
-                key={product._id}
-                className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200"
-              >
-                <div className="relative">
-                  <img
-                    src={product.images?.[0]?.url || '/placeholder-produce.jpg'}
-                    alt={product.name}
-                    className="w-full h-48 object-cover"
-                    loading="lazy"
-                  />
-                  <button
-                    onClick={() => toggleFavorite(product._id)}
-                    className="absolute top-3 right-3 p-2 bg-white rounded-full shadow-sm hover:shadow-md transition-all"
-                  >
-                    <Heart 
-                      className={`w-4 h-4 ${
-                        favorites.includes(product._id) 
-                          ? 'text-red-500 fill-current' 
-                          : 'text-gray-400'
-                      }`} 
-                    />
-                  </button>
-                  {product.userId?.farmName && (
-                    <div className="absolute bottom-3 left-3 flex items-center space-x-1 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
-                      <MapPin className="w-3 h-3" />
-                      <span>{product.userId.farmName}</span>
-                    </div>
-                  )}
-                </div>
-                
-                <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-1">{product.name}</h3>
-                  <div className="flex items-center space-x-1 mb-2">
-                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                    <span className="text-sm font-medium">4.8</span>
-                    <span className="text-sm text-gray-500">{product.category || 'Vegetables'}</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-lg font-bold text-green-600">
-                      {currencySymbol}{product.price?.toLocaleString() || '0'}
-                    </span>
-                    <span className="text-sm text-gray-500">per kg</span>
-                  </div>
-
-                  <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
-                    <span>{product.images?.length || 4} photos available</span>
-                    <span className="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-medium">
-                      In Stock
-                    </span>
-                  </div>
-                  
-                  <button
-                    onClick={() => handleOrderClick(product)}
-                    className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg font-medium transition-colors flex items-center justify-center space-x-2"
-                  >
-                    <Package className="w-4 h-4" />
-                    <span>Order Now</span>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+        {/* Products Section - This is where loading/error states are shown */}
+        <ProductsContent />
 
         {/* Order Modal */}
         {selectedProduct && (
