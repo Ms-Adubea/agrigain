@@ -41,13 +41,14 @@ export const apiUpdateListing = async (id, formData) => {
 export const apiGetMarketplaceProducts = async () => {
   try {
     const response = await apiClient.get('/assets');
-    // Handle the array response structure
-    return Array.isArray(response.data) ? response.data : [];
+    return Array.isArray(response.data.assets) ? response.data.assets : [];
   } catch (error) {
     console.error('Error fetching marketplace products:', error);
     throw error;
   }
 };
+
+
 
 // export const apiGetVendorListings = () => apiClient.get('/assets/me');
 
@@ -84,7 +85,7 @@ export const apiGetVendorListings = async () => {
 
 export const apiDeleteListing = async (id) => {
   try {
-    const response = await apiClient.delete(`/assets/${assetid}`);
+    const response = await apiClient.delete(`/assets/${id}`);
     return response.data;
   } catch (error) {
     console.error('Error deleting listing:', error);

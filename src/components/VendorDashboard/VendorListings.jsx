@@ -145,7 +145,8 @@ const VendorListings = () => {
                 <div className="flex-grow">
                   <h3 className="text-lg font-semibold mb-1 line-clamp-2">{item.name}</h3>
                   <p className="text-gray-600 text-sm mb-2 line-clamp-3">{item.description}</p>
-                  <p className="text-green-700 font-bold text-lg mb-3">₦{item.price.toLocaleString()}</p>
+                  <p className="text-green-700 font-bold text-lg mb-3">₵{item.price.toLocaleString()}</p>
+
                   <p className="text-sm text-gray-500">Category: {item.category}</p>
                 </div>
                 
