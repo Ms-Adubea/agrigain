@@ -84,7 +84,7 @@ export const apiGetVendorListings = async () => {
 
 export const apiDeleteListing = async (id) => {
   try {
-    const response = await apiClient.delete(`/assets/${id}`);
+    const response = await apiClient.delete(`/assets/${assetid}`);
     return response.data;
   } catch (error) {
     console.error('Error deleting listing:', error);

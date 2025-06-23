@@ -125,7 +125,7 @@ export const apiGetUserProduce = async () => {
 
 export const apiDeleteProduce = async (id) => {
   try {
-    const response = await apiClient.delete(`/produce/me/${id}`);
+    const response = await apiClient.delete(`/produce/${id}`);
     return response.data;
   } catch (error) {
     console.error("Delete produce failed:", error);
@@ -136,7 +136,7 @@ export const apiDeleteProduce = async (id) => {
 export const apiUpdateProduce = async (id, formData) => {
   try {
     console.log("Updating produce with ID:", id, "Data:", formData);
-    const response = await apiClient.patch(`/produce/me/${id}`, formData, {
+    const response = await apiClient.patch(`/produce/${id}`, formData, {
       headers: {
         'Content-Type': 'application/json', // Changed from multipart/form-data since you're sending JSON
       },
