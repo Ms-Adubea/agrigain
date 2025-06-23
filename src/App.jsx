@@ -1,44 +1,3 @@
-// import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import "./App.css";
-// import RootLayout from "./layout/RootLayout";
-// import Home from "./pages/Home";
-// import About from "./pages/About";
-// import Products from "./pages/Products";
-// import Investors from "./pages/Investors";
-// import Blog from "./pages/Blog";
-// import Signup from "./pages/Signup";
-// import Dashboard from "./pages/Dashboard";
-// import Login from "./pages/Login";
-
-// function App() {
-//  const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <RootLayout />,
-//     children: [
-//       { index: true, element: <Home /> },
-//       { path: "about", element: <About /> },
-//       { path: "products", element: <Products /> },
-//       { path: "investors", element: <Investors /> },
-//       { path: "blog", element: <Blog /> },
-//       { path: "signup", element: <Signup /> },
-//       { path: "login", element: <Login /> },
-//       { path: "dashboard", element: <Dashboard /> }, // Add this line
-// { path: "dashboard/:role", element: <Dashboard /> }
-
-//     ],
-//   },
-// ]);
-
-//   return (
-//     <>
-//       <RouterProvider router={router} />
-//     </>
-//   );
-// }
-
-// export default App;
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import RootLayout from "./layout/RootLayout";
@@ -62,6 +21,10 @@ import AdminRegister from "./pages/admin/AdminRegister";
 import AdminProjects from "./components/AdminPanel/AdminProjects";
 import AdminProjectPage from "./components/AdminPanel/AdminProjectPage";
 import ContactPage from "./pages/ContactPage";
+import InvestorOverview from "./components/InvestorDashboard/InvestorOverview";
+import InvestorProjects from "./components/InvestorDashboard/InvestorProjects";
+import InvestorPortfolio from "./components/InvestorDashboard/InvestorPortfolio";
+import InvestorProfile from "./components/InvestorDashboard/InvestorProfile";
 
 function App() {
   const router = createBrowserRouter([
@@ -82,7 +45,18 @@ function App() {
 
     { path: "dashboard/farmer", element: <FarmerDashboard /> },
     { path: "dashboard/vendor", element: <VendorDashboard /> },
-    { path: "dashboard/investor", element: <InvestorDashboard /> },
+
+    { path: "dashboard/investor", element: <InvestorDashboard />, 
+      children: [
+        { index: true, element: <InvestorOverview /> },
+         { path: "projects", element: <InvestorProjects /> },
+         { path: "portfolio", element: <InvestorPortfolio /> },
+          { path: "profile", element: <InvestorProfile /> },
+      ]
+
+    },
+
+
     { path: "dashboard/buyer", element: <BuyerDashboard /> },
     {
       path: "dashboard/admin",

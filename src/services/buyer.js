@@ -27,3 +27,24 @@ export const apiGetAllProduce = async () => {
     throw error;
   }
 };
+
+export const apiMakeOrder = async (userData) => {
+  try {
+    const response = await apiClient.post('/orders', userData);
+    return response.data;
+  } catch (error) {
+    console.error("Add produce failed:", error);
+    throw error;
+  }
+};
+
+export const apiGetMarketplaceProducts = async () => {
+  try {
+    const response = await apiClient.get('/assets');
+    // Handle the array response structure
+    return Array.isArray(response.data) ? response.data : [];
+  } catch (error) {
+    console.error('Error fetching marketplace products:', error);
+    throw error;
+  }
+};
