@@ -48,24 +48,25 @@ export const apiChangeUserRole = async (userId, role) => {
 
 // GET all projects
 export const apiGetAllProjects = async () => {
-  const res = await apiClient.get('/admin/projects');
+  const res = await apiClient.get('/investments');
   return res.data;
 };
 
 // POST new project
 export const apiCreateProject = async (data) => {
-  const res = await apiClient.post('/admin/projects', data);
+  const res = await apiClient.post('/admin/investments', data);
   return res.data;
 };
 
 // PATCH update project
 export const apiUpdateProject = async (id, data) => {
-  const res = await apiClient.patch(`/admin/projects/${id}`, data);
+  const res = await apiClient.patch(`/admin/investments/${id}`, data);
   return res.data;
 };
 
 // PATCH archive or delete
-export const apiArchiveProject = async (id) => {
-  const res = await apiClient.patch(`/admin/projects/${id}/archive`);
+export const apiDeleteProject = async (id) => {
+  const res = await apiClient.delete(`/admin/investments/${id}`);
   return res.data;
 };
+
