@@ -26,6 +26,8 @@ import InvestorProjects from "./components/InvestorDashboard/InvestorProjects";
 import InvestorPortfolio from "./components/InvestorDashboard/InvestorPortfolio";
 import InvestorProfile from "./components/InvestorDashboard/InvestorProfile";
 import InvestmentApplicationsAdmin from "./components/AdminPanel/InvestmentApplicationsAdmin";
+import ApplicationDetailPage from "./components/AdminPanel/ApplicationDetailPage";
+import AdminApplicationDetail from "./components/AdminPanel/AdminApplicationDetail";
 
 function App() {
   const router = createBrowserRouter([
@@ -68,6 +70,9 @@ function App() {
         { path: "applications", element: <InvestmentApplicationsAdmin /> },
         { path: "projects", element: <AdminProjects /> },
         { path: "projects/:id", element: <AdminProjectPage /> },
+        { path: "applications/:id", element: <AdminApplicationDetail /> }, 
+        // { path: "applications/:id", element: <ApplicationDetailPage /> },
+
       ],
     },
 
