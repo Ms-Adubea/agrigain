@@ -70,3 +70,14 @@ export const apiDeleteProject = async (id) => {
   return res.data;
 };
 
+export const apiGetInvestorApplications = async () => {
+  const res = await apiClient.get('/admin/investor-applications');
+  return res.data; // Returns: Array of applications
+
+};
+
+export const apiUpdateApplication = async (id, data) => {
+  const res = await apiClient.patch(`/applications/${id}/status`, data);
+  return res.data;
+};
+

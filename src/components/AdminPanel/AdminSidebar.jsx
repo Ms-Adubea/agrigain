@@ -15,7 +15,7 @@ import { Link, useLocation } from 'react-router-dom';
 const navItems = [
   { label: 'Dashboard', icon: <Home size={18} />, path: '/dashboard/admin' },
   { label: 'All Users', icon: <Users size={18} />, path: '/dashboard/admin/users' },
-  { label: 'Listings', icon: <ListOrdered size={18} />, path: '/dashboard/admin/listings' },
+  { label: 'Applications', icon: <ListOrdered size={18} />, path: '/dashboard/admin/applications' },
   { label: 'Projects', icon: <BarChart3 size={18} />, path: '/dashboard/admin/projects' },
 ];
 

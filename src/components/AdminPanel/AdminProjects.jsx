@@ -1,3 +1,4 @@
+// AdminProjects.jsx with Pagination, Modal Form, Status Toggle, and Link to Detail Page
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -8,7 +9,6 @@ import {
   apiDeleteProject,
 } from "../../services/admin";
 import CreateInvestment from "./CreateInvestment";
-import ProjectDetailModal from "./ProjectDetailModal";
 
 const AdminProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -17,7 +17,9 @@ const AdminProjects = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
   const [sortBy, setSortBy] = useState("");
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,25 +34,27 @@ const AdminProjects = () => {
     fetchProjects();
   }, []);
 
-  const handleAddOrUpdate = async (data, isEdit = false) => {
-    try {
-      if (isEdit && editingProject) {
-        const updated = await apiUpdateProject(editingProject._id, data);
-        setProjects((prev) =>
-          prev.map((p) => (p._id === updated._id ? updated : p))
-        );
-        Swal.fire("Updated", "Project updated successfully.", "success");
-      } else {
-        const { investment } = await apiCreateProject(data);
-        setProjects((prev) => [...prev, investment]);
-        Swal.fire("Created", "Project created successfully.", "success");
-      }
-      setShowForm(false);
-      setEditingProject(null);
-    } catch (err) {
-      Swal.fire("Error", "Failed to save project.", "error");
+ const handleAddOrUpdate = async (data, isEdit = false) => {
+  try {
+    if (isEdit && editingProject) {
+      const { id, ...sanitizedData } = data; // remove _id
+      const updated = await apiUpdateProject(_id, sanitizedData);
+      setProjects((prev) =>
+        prev.map((p) => (p.id === updated.id ? updated : p))
+      );
+      Swal.fire("Updated", "Project updated successfully.", "success");
+    } else {
+      const { investment } = await apiCreateProject(data);
+      setProjects((prev) => [...prev, investment]);
+      Swal.fire("Created", "Project created successfully.", "success");
     }
-  };
+    setShowForm(false);
+    setEditingProject(null);
+  } catch (err) {
+    Swal.fire("Error", "Failed to save project.", "error");
+  }
+};
+
 
   const handleDelete = async (id) => {
     const confirm = await Swal.fire({
@@ -72,6 +76,18 @@ const AdminProjects = () => {
     }
   };
 
+  const toggleStatus = async (project) => {
+    const updated = { ...project, status: project.status === "open" ? "closed" : "open" };
+    try {
+      await apiUpdateProject(project._id, updated);
+      setProjects((prev) =>
+        prev.map((p) => (p.id === project.id ? updated : p))
+      );
+    } catch {
+      Swal.fire("Error", "Failed to update status.", "error");
+    }
+  };
+
   const filtered = projects
     .filter((p) => p.title.toLowerCase().includes(searchTerm.toLowerCase()))
     .filter((p) => (filterStatus ? p.status === filterStatus : true))
@@ -80,6 +96,12 @@ const AdminProjects = () => {
       if (sortBy === "durationMonths") return b.durationMonths - a.durationMonths;
       return 0;
     });
+
+  const pageCount = Math.ceil(filtered.length / itemsPerPage);
+  const paginated = filtered.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <div className="space-y-6">
@@ -124,14 +146,14 @@ const AdminProjects = () => {
         </select>
       </div>
 
-      {filtered.length === 0 ? (
+      {paginated.length === 0 ? (
         <p>No matching projects found.</p>
       ) : (
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {filtered.map((proj) => (
+          {paginated.map((proj) => (
             <div
               key={proj._id}
-              className="bg-white border rounded shadow p-4"
+              className="bg-white border rounded shadow p-4 cursor-pointer"
               onClick={() => navigate(`/admin/projects/${proj._id}`)}
             >
               <h3 className="font-semibold text-lg mb-1">{proj.title}</h3>
@@ -159,8 +181,34 @@ const AdminProjects = () => {
                 >
                   Delete
                 </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleStatus(proj);
+                  }}
+                  className="text-yellow-600 text-sm hover:underline"
+                >
+                  {proj.status === "open" ? "Close" : "Reopen"}
+                </button>
               </div>
             </div>
+          ))}
+        </div>
+      )}
+
+      {/* Pagination */}
+      {pageCount > 1 && (
+        <div className="flex justify-center gap-2 mt-4">
+          {Array.from({ length: pageCount }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`px-3 py-1 border rounded ${
+                page === currentPage ? 'bg-green-600 text-white' : 'bg-white'
+              }`}
+            >
+              {page}
+            </button>
           ))}
         </div>
       )}
@@ -175,11 +223,6 @@ const AdminProjects = () => {
           onSubmit={handleAddOrUpdate}
         />
       )}
-
-      <ProjectDetailModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
     </div>
   );
 };
