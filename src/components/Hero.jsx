@@ -57,12 +57,12 @@ const Hero = () => {
           {/* Right: Cards */}
           <div className="grid grid-cols-2 gap-6">
             <div className="bg-white text-gray-900 p-6 rounded-lg shadow-md">
-              <Users className="h-8 w-8 text-green-700 mb-4" />
+              <TrendingUp className="h-8 w-8 text-green-700 mb-4" />
               <h3 className="font-semibold text-lg">For Investors</h3>
               <p className="text-sm text-gray-600">Earn returns while supporting sustainable agriculture</p>
             </div>
             <div className="bg-white text-gray-900 p-6 rounded-lg shadow-md">
-              <TrendingUp className="h-8 w-8 text-green-700 mb-4" />
+              <Users className="h-8 w-8 text-green-700 mb-4" />
               <h3 className="font-semibold text-lg">For Buyers</h3>
               <p className="text-sm text-gray-600">Source certified commodities grown to specification</p>
             </div>

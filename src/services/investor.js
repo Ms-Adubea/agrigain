@@ -20,3 +20,9 @@ export const apiGetAllInvestments = async () => {
     throw error;
   }
 };
+
+// POST application to invest
+export const apiApplyToInvest = async (data) => {
+  const res = await apiClient.post(`/investments/${id}/apply`, data);
+  return res.data;
+};
