@@ -1,19 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
-import { apiFarmerProfile } from '../../services/farmer';
+import { apiFarmerProfile, apiUpdateFarmerProfile } from '../../services/farmer';
 
 const allowedCrops = ["maize", "rice", "cassava", "yam", "sorghum", "tomato", "tomatoes", "pepper", "onion"];
 
-const FarmerProfileForm = ({ onComplete }) => {
+const FarmerProfileForm = ({ onComplete, existingProfile }) => {
   const [formData, setFormData] = useState({
+    fullName: '',
+    deliveryAddress: '',
+    contactNumber: '',
     farmSize: '',
     cropTypes: '',
     region: '',
     experienceYears: '',
+    preferredProduce: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    if (existingProfile) {
+      setFormData({
+        fullName: existingProfile.fullName || '',
+        deliveryAddress: existingProfile.deliveryAddress || '',
+        contactNumber: existingProfile.contactNumber || '',
+        farmSize: existingProfile.farmSize || '',
+        cropTypes: existingProfile.cropTypes?.join(', ') || '',
+        region: existingProfile.region || '',
+        experienceYears: existingProfile.experienceYears || '',
+        preferredProduce: existingProfile.preferredProduce?.join(', ') || ''
+      });
+    }
+  }, [existingProfile]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,7 +39,6 @@ const FarmerProfileForm = ({ onComplete }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form is submitting...");
     setIsSubmitting(true);
 
     const cropList = formData.cropTypes
@@ -29,7 +46,11 @@ const FarmerProfileForm = ({ onComplete }) => {
       .map(crop => crop.trim().toLowerCase())
       .filter(crop => crop);
 
-    // Validate crop types
+    const produceList = formData.preferredProduce
+      .split(',')
+      .map(produce => produce.trim())
+      .filter(produce => produce);
+
     const invalidCrops = cropList.filter(crop => !allowedCrops.includes(crop));
     if (invalidCrops.length > 0) {
       Swal.fire({
@@ -45,73 +66,77 @@ const FarmerProfileForm = ({ onComplete }) => {
       const payload = {
         ...formData,
         cropTypes: cropList,
+        preferredProduce: produceList,
         experienceYears: parseInt(formData.experienceYears),
       };
-
-      console.log("Sending payload:", payload);
       
-      const res = await apiFarmerProfile(payload);
-      console.log("API Response:", res);
+      const res = existingProfile 
+        ? await apiUpdateFarmerProfile(payload)
+        : await apiFarmerProfile(payload);
       
-      if (res && res.data) {
-        setProfile(res.data);
-        await Swal.fire('Success', 'Profile created successfully!', 'success');
-        
-        // ✅ FIXED: Call onComplete immediately after successful profile creation
-        if (onComplete) {
-          onComplete();
-        }
+      if (res?.data) {
+        await Swal.fire(
+          'Success', 
+          `Profile ${existingProfile ? 'updated' : 'created'} successfully!`, 
+          'success'
+        );
+        onComplete(res.data);
       } else {
-        console.error("Unexpected response structure:", res);
         throw new Error("Invalid response structure");
       }
     } catch (err) {
-      console.error("Full error object:", err);
-      console.error("Error response:", err.response);
-      console.error("Error message:", err.message);
-      
-      let errorMessage = 'Failed to create profile';
-      if (err.response?.data?.message) {
-        errorMessage = err.response.data.message;
-      } else if (err.message) {
-        errorMessage = err.message;
-      }
-      
-      Swal.fire('Error', errorMessage, 'error');
+      Swal.fire(
+        'Error',
+        err.response?.data?.message || err.message || `Failed to ${existingProfile ? 'update' : 'create'} profile`,
+        'error'
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const goToDashboard = () => {
-    if (onComplete) onComplete();
-  };
-
-  // ✅ OPTIONAL: You can remove this entire section if you want the form to disappear immediately
-  // after profile creation. The parent component will handle the navigation.
-  if (profile) {
-    return (
-      <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md space-y-4">
-        <h2 className="text-2xl font-bold mb-2">Profile Created Successfully!</h2>
-        <p><strong>Farm Size:</strong> {profile.farmSize}</p>
-        <p><strong>Crop Types:</strong> {profile.cropTypes.join(', ')}</p>
-        <p><strong>Region:</strong> {profile.region}</p>
-        <p><strong>Experience:</strong> {profile.experienceYears} years</p>
-
-        <button
-          onClick={goToDashboard}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
-          Continue to Dashboard
-        </button>
-      </div>
-    );
-  }
-
   return (
     <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Create Farmer Profile</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        {existingProfile ? 'Update' : 'Create'} Farmer Profile
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label className="block mb-1 font-medium">Full Name</label>
+          <input
+            type="text"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block mb-1 font-medium">Delivery Address</label>
+          <input
+            type="text"
+            name="deliveryAddress"
+            value={formData.deliveryAddress}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block mb-1 font-medium">Contact Number</label>
+          <input
+            type="text"
+            name="contactNumber"
+            value={formData.contactNumber}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+
         <div>
           <label className="block mb-1 font-medium">Farm Size</label>
           <input
@@ -140,6 +165,19 @@ const FarmerProfileForm = ({ onComplete }) => {
         </div>
 
         <div>
+          <label className="block mb-1 font-medium">Preferred Produce (comma-separated)</label>
+          <input
+            type="text"
+            name="preferredProduce"
+            value={formData.preferredProduce}
+            onChange={handleChange}
+            placeholder="e.g. Tomatoes, Yam, Maize"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+
+        <div>
           <label className="block mb-1 font-medium">Region</label>
           <input
             type="text"
@@ -159,20 +197,19 @@ const FarmerProfileForm = ({ onComplete }) => {
             name="experienceYears"
             value={formData.experienceYears}
             onChange={handleChange}
-            placeholder="e.g. 3"
             className="w-full p-2 border rounded"
             required
           />
         </div>
 
-        <button
+       <button
           type="submit"
           disabled={isSubmitting}
           className={`bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 ${
             isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
           }`}
         >
-          {isSubmitting ? 'Submitting...' : 'Create Profile'}
+          {isSubmitting ? 'Submitting...' : (existingProfile ? 'Update Profile' : 'Create Profile')}
         </button>
       </form>
     </div>

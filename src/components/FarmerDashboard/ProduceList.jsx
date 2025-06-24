@@ -280,7 +280,7 @@ const ProduceList = () => {
                     <p className="text-gray-600 mb-3 text-sm line-clamp-3">{item.description}</p>
                     
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-green-600 font-bold text-lg">₦{Number(item.price).toLocaleString()}</span>
+                      <span className="text-green-600 font-bold text-lg">₵{Number(item.price).toLocaleString()}</span>
                       <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
                         {item.category}
                       </span>
@@ -306,7 +306,7 @@ const ProduceList = () => {
                   <div className="flex gap-2 mt-4">
                     <button
                       onClick={() => startEdit(item)}
-                      className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg flex-1 transition-colors"
+                      className="bg-green-700 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg flex-1 transition-colors"
                     >
                       ✏️ Edit
                     </button>
